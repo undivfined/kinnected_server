@@ -368,6 +368,17 @@ describe("seed", () => {
         });
       });
     });
+    test("credentials data has been inserted correctly", () => {
+      return db
+        .query(`SELECT * FROM credentials;`)
+        .then(({ rows: credentials }) => {
+          expect(credentials).toHaveLength(15);
+          credentials.forEach((credential) => {
+            expect(credential).toHaveProperty("username");
+            expect(credential).toHaveProperty("password");
+          });
+        });
+    });
     test("cards data has been inserted correctly", () => {
       return db.query(`SELECT * FROM cards;`).then(({ rows: cards }) => {
         expect(cards).toHaveLength(15);
@@ -378,10 +389,24 @@ describe("seed", () => {
           expect(card).toHaveProperty("name");
           expect(card).toHaveProperty("timezone");
           expect(card).toHaveProperty("date_of_birth");
-
           expect(card).toHaveProperty("date_of_last_contact");
         });
       });
+    });
+    test("connections data has been inserted correctly", () => {
+      return db
+        .query(`SELECT * FROM connections;`)
+        .then(({ rows: connections }) => {
+          expect(connections).toHaveLength(15);
+          connections.forEach((connection) => {
+            expect(connection).toHaveProperty("connection_id");
+            expect(connection).toHaveProperty("username_1");
+            expect(connection).toHaveProperty("username_2");
+            expect(connection).toHaveProperty("type_of_relationship");
+            expect(connection).toHaveProperty("date_of_last_contact");
+            expect(connection).toHaveProperty("messaging_link");
+          });
+        });
     });
   });
 });
