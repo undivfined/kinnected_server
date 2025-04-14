@@ -5,7 +5,7 @@ export default [
     username: "rsimpson_dev",
     timezone: "Asia/Seoul",
     date_of_birth: "1995-03-25",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/students-avatar-cartoon-design-this-illustration-masterfully-captures-essence-education_198565-9584.jpg?w=740",
   },
   {
     first_name: "Jaime",
@@ -13,7 +13,7 @@ export default [
     username: "castro292",
     timezone: "Africa/Khartoum",
     date_of_birth: "1980-09-28",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Barbara",
@@ -21,7 +21,7 @@ export default [
     username: "barbara38",
     timezone: "America/El_Salvador",
     date_of_birth: "1981-12-09",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/attractive-cheerful-woman-semi-flat-vector-character-head-lady-with-bun-hairstyle-bangs-editable-cartoon-avatar-icon-face-emotion-colorful-spot-illustration-web-graphic-design-animation_151150-15966.jpg?w=740",
   },
   {
     first_name: "Jessica",
@@ -29,7 +29,7 @@ export default [
     username: "martinez273",
     timezone: "America/Guatemala",
     date_of_birth: "1988-08-16",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Gary",
@@ -37,7 +37,7 @@ export default [
     username: "gary_diaz",
     timezone: "Africa/Gaborone",
     date_of_birth: "1986-06-14",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/students-avatar-cartoon-design-this-illustration-masterfully-captures-essence-education_198565-9584.jpg?w=740",
   },
   {
     first_name: "Randy",
@@ -45,7 +45,7 @@ export default [
     username: "rbaker_hq",
     timezone: "America/St_Lucia",
     date_of_birth: "1964-06-26",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/students-avatar-cartoon-design-this-illustration-masterfully-captures-essence-education_198565-9584.jpg?w=740",
   },
   {
     first_name: "Lawrence",
@@ -53,7 +53,7 @@ export default [
     username: "lking_x",
     timezone: "America/Guatemala",
     date_of_birth: "1974-05-11",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Tommy",
@@ -61,7 +61,7 @@ export default [
     username: "tommy92",
     timezone: "Asia/Bishkek",
     date_of_birth: "1978-04-25",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Amanda",
@@ -69,7 +69,7 @@ export default [
     username: "acarney_x",
     timezone: "Africa/Monrovia",
     date_of_birth: "1956-08-21",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/modern-girls-avatar-circle-young-stylish-woman-eyeglasses-head-portrait-cool-pretty-female-character-face-glasses-red-lips-flat-vector-illustration-isolated-white-background_198278-21286.jpg?w=740",
   },
   {
     first_name: "Anthony",
@@ -77,7 +77,7 @@ export default [
     username: "ajones_hq",
     timezone: "Pacific/Apia",
     date_of_birth: "1982-03-13",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/asian-positive-brunette-man-semi-flat-vector-character-head-semi-flat-vector-character-head-editable-cartoon-avatar-icon-face-emotion-colorful-spot-illustration-web-graphic-design-animation_151150-15967.jpg?w=740",
   },
   {
     first_name: "Elizabeth",
@@ -85,7 +85,7 @@ export default [
     username: "woods770",
     timezone: "Africa/Blantyre",
     date_of_birth: "1998-01-23",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/pixelz-avatars-young-person-hipsters-pixelated-avatar-takes-center-stage_198565-9420.jpg?w=740",
   },
   {
     first_name: "Jocelyn",
@@ -93,7 +93,7 @@ export default [
     username: "jrodriguez_hq",
     timezone: "Asia/Seoul",
     date_of_birth: "1980-04-08",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Danny",
@@ -101,7 +101,7 @@ export default [
     username: "walker747",
     timezone: "America/Paramaribo",
     date_of_birth: "1994-12-13",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-282.jpg?w=740",
   },
   {
     first_name: "Jason",
@@ -109,7 +109,7 @@ export default [
     username: "jason_gates",
     timezone: "Europe/Samara",
     date_of_birth: "1978-03-09",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=740",
   },
   {
     first_name: "Brian",
@@ -117,7 +117,7 @@ export default [
     username: "brian_gonzalez",
     timezone: "America/Panama",
     date_of_birth: "2003-01-29",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Gary",
@@ -125,7 +125,7 @@ export default [
     username: "gary.baldwin",
     timezone: "America/Guyana",
     date_of_birth: "1975-12-11",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-280.jpg?w=740",
   },
   {
     first_name: "Brian",
@@ -133,7 +133,7 @@ export default [
     username: "brian21",
     timezone: "Africa/Mogadishu",
     date_of_birth: "1987-01-20",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Christopher",
@@ -141,7 +141,7 @@ export default [
     username: "christopher_ryan",
     timezone: "America/Bogota",
     date_of_birth: "1978-07-01",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/asian-positive-brunette-man-semi-flat-vector-character-head-semi-flat-vector-character-head-editable-cartoon-avatar-icon-face-emotion-colorful-spot-illustration-web-graphic-design-animation_151150-15967.jpg?w=740",
   },
   {
     first_name: "Felicia",
@@ -149,7 +149,7 @@ export default [
     username: "felicia43",
     timezone: "Asia/Taipei",
     date_of_birth: "1955-09-22",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/blonde-woman-employee-semi-flat-vector-character-head_151150-15100.jpg?w=740",
   },
   {
     first_name: "Steven",
@@ -157,7 +157,7 @@ export default [
     username: "steven91",
     timezone: "Pacific/Tongatapu",
     date_of_birth: "1990-01-28",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/free-vector/man-profile-account-picture_24908-81754.jpg?t=st=1744621617~exp=1744625217~hmac=12312537ba7df03ab23905fc876af087e3d16d289583704a4b544994844544cd&w=740",
   },
   {
     first_name: "Kevin",
@@ -165,7 +165,7 @@ export default [
     username: "kevin.preston",
     timezone: "Europe/Bucharest",
     date_of_birth: "1983-06-22",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Jason",
@@ -173,7 +173,7 @@ export default [
     username: "jward_dev",
     timezone: "Europe/Tirane",
     date_of_birth: "1961-06-21",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-282.jpg?w=740",
   },
   {
     first_name: "Michelle",
@@ -181,7 +181,7 @@ export default [
     username: "mday_hq",
     timezone: "America/Belize",
     date_of_birth: "1982-11-25",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/portrait-beautiful-women-round-frame-avatar-female-character-isolated-white-background_559729-213.jpg?w=740",
   },
   {
     first_name: "Jesse",
@@ -189,7 +189,7 @@ export default [
     username: "jesse.larson",
     timezone: "Pacific/Guadalcanal",
     date_of_birth: "1955-06-24",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Ashley",
@@ -197,7 +197,7 @@ export default [
     username: "ashley38",
     timezone: "Europe/Uzhgorod",
     date_of_birth: "1985-06-12",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/businesswoman-avatar-face-portrait-modern-young-business-woman-head-circle-ceo-office-worker-jacket-profile-advisor-expert-girl-flat-vector-illustration-isolated-white-background_633472-1094.jpg?w=740",
   },
   {
     first_name: "Robert",
@@ -205,7 +205,7 @@ export default [
     username: "rangel855",
     timezone: "Pacific/Palau",
     date_of_birth: "1955-06-04",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Tyler",
@@ -213,7 +213,7 @@ export default [
     username: "tyler_crane",
     timezone: "Europe/Andorra",
     date_of_birth: "1984-06-03",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-280.jpg?w=740",
   },
   {
     first_name: "Willie",
@@ -221,7 +221,7 @@ export default [
     username: "willie_lawrence",
     timezone: "Africa/Kigali",
     date_of_birth: "1955-04-17",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Gary",
@@ -229,7 +229,7 @@ export default [
     username: "nguyen523",
     timezone: "Pacific/Palau",
     date_of_birth: "1985-02-21",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/free-vector/man-profile-account-picture_24908-81754.jpg?t=st=1744621617~exp=1744625217~hmac=12312537ba7df03ab23905fc876af087e3d16d289583704a4b544994844544cd&w=740",
   },
   {
     first_name: "Anthony",
@@ -237,7 +237,7 @@ export default [
     username: "asutton_x",
     timezone: "Africa/Djibouti",
     date_of_birth: "1993-06-18",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Michael",
@@ -245,7 +245,7 @@ export default [
     username: "michael83",
     timezone: "Africa/Kigali",
     date_of_birth: "1956-06-09",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Evan",
@@ -253,7 +253,7 @@ export default [
     username: "cochran188",
     timezone: "Europe/Dublin",
     date_of_birth: "1999-11-24",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/students-avatar-cartoon-design-this-illustration-masterfully-captures-essence-education_198565-9584.jpg?w=740",
   },
   {
     first_name: "Vanessa",
@@ -261,7 +261,7 @@ export default [
     username: "vanessa_hall",
     timezone: "Europe/Zurich",
     date_of_birth: "1960-03-23",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/attractive-cheerful-woman-semi-flat-vector-character-head-lady-with-bun-hairstyle-bangs-editable-cartoon-avatar-icon-face-emotion-colorful-spot-illustration-web-graphic-design-animation_151150-15966.jpg?w=740",
   },
   {
     first_name: "Olivia",
@@ -269,7 +269,7 @@ export default [
     username: "olivia_williams",
     timezone: "Pacific/Apia",
     date_of_birth: "1957-10-26",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Jason",
@@ -277,7 +277,7 @@ export default [
     username: "elliott658",
     timezone: "Europe/Athens",
     date_of_birth: "1992-05-18",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=740",
   },
   {
     first_name: "Cindy",
@@ -285,7 +285,7 @@ export default [
     username: "cindy_bartlett",
     timezone: "America/Costa_Rica",
     date_of_birth: "1982-05-16",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/modern-girls-avatar-circle-young-stylish-woman-eyeglasses-head-portrait-cool-pretty-female-character-face-glasses-red-lips-flat-vector-illustration-isolated-white-background_198278-21286.jpg?w=740",
   },
   {
     first_name: "Patricia",
@@ -293,7 +293,7 @@ export default [
     username: "patricia_cordova",
     timezone: "America/Asuncion",
     date_of_birth: "1988-11-02",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Wesley",
@@ -301,7 +301,7 @@ export default [
     username: "wesley_rogers",
     timezone: "Pacific/Nauru",
     date_of_birth: "1958-09-08",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/asian-positive-brunette-man-semi-flat-vector-character-head-semi-flat-vector-character-head-editable-cartoon-avatar-icon-face-emotion-colorful-spot-illustration-web-graphic-design-animation_151150-15967.jpg?w=740",
   },
   {
     first_name: "Craig",
@@ -309,7 +309,7 @@ export default [
     username: "craig.hines",
     timezone: "Europe/Vilnius",
     date_of_birth: "1964-02-01",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Jonathan",
@@ -317,7 +317,7 @@ export default [
     username: "jonathan_casey",
     timezone: "Africa/Bissau",
     date_of_birth: "1976-12-25",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-280.jpg?w=740",
   },
   {
     first_name: "Kevin",
@@ -325,7 +325,7 @@ export default [
     username: "kevin58",
     timezone: "Africa/Conakry",
     date_of_birth: "2003-09-19",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Christy",
@@ -333,7 +333,7 @@ export default [
     username: "cuevas304",
     timezone: "America/Barbados",
     date_of_birth: "1995-03-15",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/pixelz-avatars-young-person-hipsters-pixelated-avatar-takes-center-stage_198565-9420.jpg?w=740",
   },
   {
     first_name: "Amy",
@@ -341,7 +341,7 @@ export default [
     username: "conrad283",
     timezone: "Africa/Mbabane",
     date_of_birth: "1976-04-19",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Richard",
@@ -349,7 +349,7 @@ export default [
     username: "dunlap613",
     timezone: "Africa/Asmera",
     date_of_birth: "1963-01-04",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/free-vector/man-profile-account-picture_24908-81754.jpg?t=st=1744621617~exp=1744625217~hmac=12312537ba7df03ab23905fc876af087e3d16d289583704a4b544994844544cd&w=740",
   },
   {
     first_name: "Pamela",
@@ -357,7 +357,7 @@ export default [
     username: "moore325",
     timezone: "America/Antigua",
     date_of_birth: "1982-11-06",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/blonde-woman-employee-semi-flat-vector-character-head_151150-15100.jpg?w=740",
   },
   {
     first_name: "Victor",
@@ -365,7 +365,7 @@ export default [
     username: "victor24",
     timezone: "Asia/Kuwait",
     date_of_birth: "1966-01-06",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/students-avatar-cartoon-design-this-illustration-masterfully-captures-essence-education_198565-9584.jpg?w=740",
   },
   {
     first_name: "Taylor",
@@ -373,7 +373,7 @@ export default [
     username: "tkelly_x",
     timezone: "Europe/Berlin",
     date_of_birth: "1966-07-01",
-    avatar_url: "",
+    avatar_url: null,
   },
   {
     first_name: "Aimee",
@@ -381,7 +381,7 @@ export default [
     username: "afrey_x",
     timezone: "Pacific/Port_Moresby",
     date_of_birth: "2004-09-08",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/portrait-beautiful-women-round-frame-avatar-female-character-isolated-white-background_559729-213.jpg?w=740",
   },
   {
     first_name: "Michael",
@@ -389,7 +389,7 @@ export default [
     username: "mramos_dev",
     timezone: "Europe/Skopje",
     date_of_birth: "1998-05-18",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/men-icon-trendy-avatar-character-cheerful-happy-people-flat-vector-illustration-round-frame-male-portraits-group-team-adorable-guys-isolated-white-background_275421-286.jpg?w=740",
   },
   {
     first_name: "Amanda",
@@ -397,6 +397,6 @@ export default [
     username: "arhodes_dev",
     timezone: "America/Havana",
     date_of_birth: "1989-09-26",
-    avatar_url: "",
+    avatar_url: "https://img.freepik.com/premium-vector/businesswoman-avatar-face-portrait-modern-young-business-woman-head-circle-ceo-office-worker-jacket-profile-advisor-expert-girl-flat-vector-illustration-isolated-white-background_633472-1094.jpg?w=740",
   },
 ];
