@@ -23,9 +23,21 @@ const seed = ({
     })
     .then(() => {
       return db.query("DROP TABLE IF EXISTS users");
-    })
+    })    
     .then(() => {
-      return db.query("CREATE TABLE users (first_name TEXT)");
-    });
+      return createUsers();
+    })
 };
+
+function createUsers() {
+  return db.query(`CREATE TABLE users(
+    user_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    timezone VARCHAR(50) NOT NULL, 
+    date_of_birth DATE NOT NULL, 
+    avatar_url VARCHAR(1000)
+    )`)
+}
 export default seed;
