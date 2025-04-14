@@ -25,7 +25,7 @@ const seed = ({
       return db.query("DROP TABLE IF EXISTS users");
     })
     .then(() => {
-      console.log("Dropped all tables");
+      return db.query("CREATE TABLE users (first_name TEXT)");
     });
 };
 export default seed;
