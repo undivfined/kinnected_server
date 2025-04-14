@@ -1,0 +1,17 @@
+export default [
+  { user_id: 1, password: "sunsetFox12" },
+  { user_id: 2, password: "aquaRiver34" },
+  { user_id: 3, password: "stormEagle56" },
+  { user_id: 4, password: "nightOwl78" },
+  { user_id: 5, password: "crimsonSky90" },
+  { user_id: 6, password: "goldenLeaf11" },
+  { user_id: 7, password: "frostWolf23" },
+  { user_id: 8, password: "emeraldTree45" },
+  { user_id: 9, password: "thunderCat67" },
+  { user_id: 10, password: "shadowBat89" },
+  { user_id: 11, password: "silverMoon01" },
+  { user_id: 12, password: "wildLion13" },
+  { user_id: 13, password: "blazeStar25" },
+  { user_id: 14, password: "phantomHawk37" },
+  { user_id: 15, password: "ironTide49" },
+];

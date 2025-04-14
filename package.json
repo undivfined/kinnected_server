@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc --build",
+    "run-seed": "node ./dist/db/seeds/run-seed.js",
     "start": "node ./dist/listen.js",
     "start-dev": "nodemon ./src/listen.ts"
   },

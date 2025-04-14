@@ -1,13 +1,18 @@
 import db from "../connection";
 
-type UserObject = {
-  firstName: string;
-  secondName: string;
-};
+import { Users, Credentials, Connections, Cards } from "../dataTypes";
 
-type UserData = UserObject[];
-
-const seed = ({ userData }: { userData: UserData }) => {
+const seed = ({
+  userData,
+  credentialsData,
+  connectionsData,
+  cardData,
+}: {
+  userData: Users;
+  credentialsData: Credentials;
+  connectionsData: Connections;
+  cardData: Cards;
+}) => {
   return db
     .query("DROP TABLE IF EXISTS credentials")
     .then(() => {
@@ -20,7 +25,7 @@ const seed = ({ userData }: { userData: UserData }) => {
       return db.query("DROP TABLE IF EXISTS users");
     })
     .then(() => {
-      console.log("Dropped tables");
+      console.log("Dropped all tables");
     });
 };
 export default seed;
