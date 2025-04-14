@@ -27,6 +27,12 @@ const seed = ({
     .then(() => {
       return createUsers();
     })
+    .then(()=>{
+      return createCredentials();
+    })
+    .then(()=>{
+      return createCards();
+    })
 };
 
 function createUsers() {
@@ -40,5 +46,22 @@ function createUsers() {
     )`)
 }
 
+function createCredentials(){
+  return db.query(`CREATE TABLE credentials(
+    username VARCHAR(50) NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username)
+    password VARCHAR(15) NOT NULL
+    )`)
+}
+
+function createCards(){
+  return db.query(`CREATE TABLE cards(
+    creator_username VARCHAR(50) NOT NULL, CONSTRAINT fk_creator_username FOREIGN KEY (creator_username) REFERENCES users(username),
+    type_of_relationship VARCHAR(50),
+    name VARCHAR(50) NOT NULL,
+    timezone VARCHAR(50) NOT NULL,
+    date_of_birth DATE,
+    date_of_last_contact DATE 
+    )`)
+}
 
 export default seed;
