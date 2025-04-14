@@ -31,13 +31,14 @@ const seed = ({
 
 function createUsers() {
   return db.query(`CREATE TABLE users(
-    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) PRIMARY KEY NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    username VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL, 
     date_of_birth DATE NOT NULL, 
     avatar_url VARCHAR(1000)
     )`)
 }
+
+
 export default seed;

@@ -1,95 +1,88 @@
 export default [
   {
-    user_id_1: 1,
-    user_id_2: 5,
+    username_1: "amaraj_93",
+    username_2: "liamc2020",
     type_of_relationship: "Friend",
-    date_of_last_contact: "2025-04-01T17:45:00Z",
-    messaging_link: "",
+    date_of_last_contact: "2025-04-01T12:45:00Z",
+    messaging_link: ""
   },
   {
-    user_id_1: 3,
-    user_id_2: 7,
+    username_1: "sofmartz",
+    username_2: "k_osei",
     type_of_relationship: "Colleague",
-    date_of_last_contact: "2025-03-28T09:00:00Z",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 4,
-    user_id_2: 2,
-    type_of_relationship: "Partner",
-    messaging_link: "",
+    username_1: "hannahs1995",
+    username_2: "z_ali_01",
+    messaging_link: ""
   },
   {
-    user_id_1: 6,
-    user_id_2: 8,
+    username_1: "twilliams88",
+    username_2: "emjay23",
     type_of_relationship: "Family",
-    date_of_last_contact: "2025-04-03T13:20:00Z",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 10,
-    user_id_2: 11,
-    type_of_relationship: "Friend",
-    messaging_link: "",
+    username_1: "jamal.ok",
+    username_2: "maya.patel",
+    date_of_last_contact: "2025-03-10T17:20:00Z",
+    messaging_link: ""
   },
   {
-    user_id_1: 2,
-    user_id_2: 13,
+    username_1: "fatimahmed",
+    username_2: "noahk_92",
     type_of_relationship: "Mentor",
-    date_of_last_contact: "2025-03-10T20:00:00Z",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 9,
-    user_id_2: 1,
-    messaging_link: "",
+    username_1: "elijahb",
+    username_2: "ayak_k",
+    messaging_link: ""
   },
   {
-    user_id_1: 5,
-    user_id_2: 14,
+    username_1: "maya.patel",
+    username_2: "chloe.vn",
+    date_of_last_contact: "2025-03-21T10:00:00Z",
+    messaging_link: ""
+  },
+  {
+    username_1: "noahk_92",
+    username_2: "liamc2020",
     type_of_relationship: "Colleague",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 13,
-    user_id_2: 12,
-    messaging_link: "",
+    username_1: "emjay23",
+    username_2: "z_ali_01",
+    messaging_link: ""
   },
   {
-    user_id_1: 8,
-    user_id_2: 4,
+    username_1: "k_osei",
+    username_2: "elijahb",
     type_of_relationship: "Friend",
-    date_of_last_contact: "2025-04-08T15:10:00Z",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 11,
-    user_id_2: 6,
-    messaging_link: "",
+    username_1: "ayak_k",
+    username_2: "fatimahmed",
+    messaging_link: ""
   },
   {
-    user_id_1: 7,
-    user_id_2: 15,
-    type_of_relationship: "Partner",
-    date_of_last_contact: "2025-03-25T11:45:00Z",
-    messaging_link: "",
+    username_1: "chloe.vn",
+    username_2: "hannahs1995",
+    date_of_last_contact: "2025-04-06T09:30:00Z",
+    messaging_link: ""
   },
   {
-    user_id_1: 12,
-    user_id_2: 3,
-    messaging_link: "",
-  },
-  {
-    user_id_1: 15,
-    user_id_2: 10,
+    username_1: "liamc2020",
+    username_2: "twilliams88",
     type_of_relationship: "Family",
-    messaging_link: "",
+    messaging_link: ""
   },
   {
-    user_id_1: 1,
-    user_id_2: 9,
-    type_of_relationship: "Friend",
-    date_of_last_contact: "2025-04-09T10:30:00Z",
-    messaging_link: "",
-  },
+    username_1: "z_ali_01",
+    username_2: "amaraj_93",
+    messaging_link: ""
+  }
 ];
