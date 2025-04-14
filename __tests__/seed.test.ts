@@ -100,7 +100,7 @@ describe("seed", () => {
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("date_of_birth");
-          expect(column.data_type).toBe("timestamp without time zone");
+          expect(column.data_type).toBe("date");
         });
     });
     test("users table has avatar_url column of varying character", () => {
