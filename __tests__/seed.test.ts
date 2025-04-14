@@ -42,7 +42,7 @@ describe("seed", () => {
           `SELECT column_name, data_type, column_default
                       FROM information_schema.columns
                       WHERE table_name = 'users'
-                      AND column_name = 'username';`
+                      AND column_name = 'first_name';`
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("first_name");
