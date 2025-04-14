@@ -96,7 +96,7 @@ describe("seed", () => {
           `SELECT column_name, data_type
                         FROM information_schema.columns
                         WHERE table_name = 'users'
-                        AND column_name = 'timezone';`
+                        AND column_name = 'date_of_birth';`
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("date_of_birth");
