@@ -19,7 +19,7 @@ const seed = ({
       return db.query("DROP TABLE IF EXISTS connections");
     })
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS contact_cards");
+      return db.query("DROP TABLE IF EXISTS cards");
     })
     .then(() => {
       return db.query("DROP TABLE IF EXISTS users");
@@ -42,25 +42,26 @@ function createUsers() {
     last_name VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL, 
     date_of_birth DATE NOT NULL, 
-    avatar_url VARCHAR(1000)
+    avatar_url VARCHAR(100) 
     )`)
 }
 
 function createCredentials(){
   return db.query(`CREATE TABLE credentials(
-    username VARCHAR(50) NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username),
+    username VARCHAR(50) PRIMARY KEY NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username),
     password VARCHAR(15) NOT NULL
     )`)
 }
 
 function createCards(){
   return db.query(`CREATE TABLE cards(
+    card_id SERIAL PRIMARY KEY,
     creator_username VARCHAR(50) NOT NULL, CONSTRAINT fk_creator_username FOREIGN KEY (creator_username) REFERENCES users(username),
     type_of_relationship VARCHAR(50),
     name VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL,
     date_of_birth DATE,
-    date_of_last_contact DATE DEFAULT NULL
+    date_of_last_contact TIMESTAMP DEFAULT NULL
     )`)
 }
 

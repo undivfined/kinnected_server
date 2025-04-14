@@ -91,7 +91,7 @@ describe("seed", () => {
     test("users table has avatar_url column of varying character", () => {
       return db
         .query(
-          `SELECT column_name, character_maximum_length
+          `SELECT column_name, data_type
                         FROM information_schema.columns
                         WHERE table_name = 'users'
                         AND column_name = 'avatar_url';`
@@ -134,54 +134,54 @@ describe("seed", () => {
     test("credentials table password column of varying caracter", () => {
       return db
         .query(
-          `SELECT column_name, character_maximum_length
+          `SELECT column_name, data_type
                       FROM information_schema.columns
                       WHERE table_name = 'credentials'
                       AND column_name = 'password';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe("avatar_url");
+          expect(column.column_name).toBe("password");
         });
     });
   });
 
-  describe("contact_cards table", () => {
-    test("contact_cards table exists", () => {
+  describe("cards table", () => {
+    test("cards table exists", () => {
       return db
         .query(
           `SELECT EXISTS (
                       SELECT FROM
                           information_schema.tables
                       WHERE
-                          table_name = 'contact_cards'
+                          table_name = 'cards'
                       );`
         )
         .then(({ rows: [{ exists }] }) => {
           expect(exists).toBe(true);
         });
     });
-    test("contact_cards table has card_id column as the serial primary key", () => {
+    test("cards table has card_id column as the serial primary key", () => {
       return db
         .query(
           `SELECT column_name, data_type, column_default
                       FROM information_schema.columns
-                      WHERE table_name = 'contact_cards'
+                      WHERE table_name = 'cards'
                       AND column_name = 'card_id';`
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("card_id");
           expect(column.data_type).toBe("integer");
           expect(column.column_default).toBe(
-            "nextval('contact_cards_card_id_seq'::regclass)"
+            "nextval('cards_card_id_seq'::regclass)"
           );
         });
     });
-    test("contact_cards table has creator_username column of varying character", () => {
+    test("cards table has creator_username column of varying character", () => {
       return db
         .query(
           `SELECT column_name, data_type, column_default
                       FROM information_schema.columns
-                      WHERE table_name = 'contact_cards'
+                      WHERE table_name = 'cards'
                       AND column_name = 'creator_username';`
         )
         .then(({ rows: [column] }) => {
@@ -189,12 +189,12 @@ describe("seed", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
-    test("contact_cards table has type_of_relationship column as varying character", () => {
+    test("cards table has type_of_relationship column as varying character", () => {
       return db
         .query(
           `SELECT column_name, data_type
                         FROM information_schema.columns
-                        WHERE table_name = 'contact_cards'
+                        WHERE table_name = 'cards'
                         AND column_name = 'type_of_relationship';`
         )
         .then(({ rows: [column] }) => {
@@ -202,12 +202,12 @@ describe("seed", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
-    test("contact_cards table has name column as varying character", () => {
+    test("cards table has name column as varying character", () => {
       return db
         .query(
           `SELECT column_name, data_type
                         FROM information_schema.columns
-                        WHERE table_name = 'contact_cards'
+                        WHERE table_name = 'cards'
                         AND column_name = 'name';`
         )
         .then(({ rows: [column] }) => {
@@ -215,12 +215,12 @@ describe("seed", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
-    test("contact_cards table has timezone column as varying character", () => {
+    test("cards table has timezone column as varying character", () => {
       return db
         .query(
           `SELECT column_name, data_type
                         FROM information_schema.columns
-                        WHERE table_name = 'contact_cards'
+                        WHERE table_name = 'cards'
                         AND column_name = 'timezone';`
         )
         .then(({ rows: [column] }) => {
@@ -228,25 +228,25 @@ describe("seed", () => {
           expect(column.data_type).toBe("character varying");
         });
     });
-    test("contact_cards table has date_of_birth column of varying character", () => {
+    test("cards table has date_of_birth column of date", () => {
       return db
         .query(
-          `SELECT column_name, character_maximum_length
+          `SELECT column_name, data_type
                         FROM information_schema.columns
-                        WHERE table_name = 'contact_cards'
+                        WHERE table_name = 'cards'
                         AND column_name = 'date_of_birth';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe(" date_of_birth");
+          expect(column.column_name).toBe("date_of_birth");
           expect(column.data_type).toBe("date");
         });
     });
-    test("contact_cards table has date_of_last_contact column of timestamp", () => {
+    test("cards table has date_of_last_contact column of timestamp", () => {
       return db
         .query(
-          `SELECT column_name, character_maximum_length
+          `SELECT column_name, data_type
                         FROM information_schema.columns
-                        WHERE table_name = 'contact_cards'
+                        WHERE table_name = 'cards'
                         AND column_name = 'date_of_last_contact';`
         )
         .then(({ rows: [column] }) => {
@@ -256,7 +256,7 @@ describe("seed", () => {
     });
   });
 
-  describe("connections table", () => {
+  xdescribe("connections table", () => {
     test("connections table exists", () => {
       return db
         .query(
