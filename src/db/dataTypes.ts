@@ -11,11 +11,11 @@ export type Users = UserObject[];
 
 export type CardObject = {
   creator_username: string;
-  type_of_relationship?: string;
+  type_of_relationship: string |null;
   name: string;
   timezone: string;
-  date_of_birth?: string;
-  date_of_last_contact?: string;
+  date_of_birth: string | null;
+  date_of_last_contact: string | null;
 };
 
 export type Cards = CardObject[];
@@ -30,9 +30,9 @@ export type Credentials = credentialObject[];
 export type connectionObject = {
   username_1: string;
   username_2: string;
-  type_of_relationship?: string;
-  date_of_last_contact?: string;
-  messaging_link?: string;
+  type_of_relationship: string |null;
+  date_of_last_contact: string |null;
+  messaging_link: string |null;
 };
 
 export type Connections = connectionObject[];

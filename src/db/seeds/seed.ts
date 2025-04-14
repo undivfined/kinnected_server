@@ -52,6 +52,20 @@ const seed = ({
       )
       return db.query(credentialsString)
     })
+    .then(()=>{
+      const formattedCardsData = formatFunc(cardData)
+      const cardsString = format(
+        `INSERT INTO cards (creator_username, type_of_relationship, name, timezone, date_of_birth, date_of_last_contact) VALUES %L RETURNING *`, formattedCardsData
+      )
+      return db.query(cardsString)
+    })
+    .then(()=>{
+      const formattedConnectionsData = formatFunc(connectionsData)
+      const connectionsString = format(
+        `INSERT INTO connections (username_1, username_2, type_of_relationship, date_of_last_contact, messaging_link) VALUES %L RETURNING *`, formattedConnectionsData
+      )
+      return db.query(connectionsString)
+    })
 };
 
 function createUsers() {
@@ -68,7 +82,7 @@ function createUsers() {
 function createCredentials(){
   return db.query(`CREATE TABLE credentials(
     credentials_id SERIAL PRIMARY KEY, 
-    username VARCHAR(50) REFERENCES users(username) NOT NULL,
+    username VARCHAR(50)  NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     password VARCHAR(15) NOT NULL
     )`)
 }
@@ -76,7 +90,7 @@ function createCredentials(){
 function createCards(){
   return db.query(`CREATE TABLE cards(
     card_id SERIAL PRIMARY KEY,
-    creator_username VARCHAR(50) NOT NULL, CONSTRAINT fk_creator_username FOREIGN KEY (creator_username) REFERENCES users(username),
+    creator_username VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     type_of_relationship VARCHAR(50),
     name VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL,
@@ -88,8 +102,8 @@ function createCards(){
 function createConnections(){
   return db.query(`CREATE TABLE connections(
     connection_id SERIAL PRIMARY KEY, 
-    username_1 VARCHAR(50) NOT NULL, CONSTRAINT fk_username_1 FOREIGN KEY (username_1) REFERENCES users(username),
-    username_2 VARCHAR(50) NOT NULL, CONSTRAINT fk_username_2 FOREIGN KEY (username_2) REFERENCES users(username),
+    username_1 VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    username_2 VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     type_of_relationship VARCHAR(50), 
     date_of_last_contact TIMESTAMP DEFAULT NULL,
     messaging_link VARCHAR(50)
