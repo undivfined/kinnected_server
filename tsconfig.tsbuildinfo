@@ -1,1 +1,1 @@
-{"root":["./src/listen.ts","./src/db/connection.ts","./src/dto/CreateUserDto.ts","./src/server/app.ts","./src/server/controllers/users.ts","./src/server/models/users.ts","./src/types/query-params.ts","./src/types/response.ts"],"version":"5.8.3"}
+{"root":["./src/listen.ts","./src/db/connection.ts","./src/db/seeds/run-seed.ts","./src/db/seeds/seed.ts","./src/dto/CreateUserDto.ts","./src/server/app.ts","./src/server/controllers/users.ts","./src/server/models/users.ts","./src/types/query-params.ts","./src/types/response.ts"],"version":"5.8.3"}
