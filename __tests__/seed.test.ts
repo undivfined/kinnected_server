@@ -117,7 +117,7 @@ describe("seed", () => {
           expect(exists).toBe(true);
         });
     });
-    test("credentials table has username column as the primary key", () => {
+    test("credentials table has credentials_id column as the primary key", () => {
       return db
         .query(
           `SELECT column_name
@@ -128,10 +128,10 @@ describe("seed", () => {
                     AND tc.table_name = 'credentials';`
         )
         .then(({ rows: [{ column_name }] }) => {
-          expect(column_name).toBe("username");
+          expect(column_name).toBe("credentials_id");
         });
     });
-    test("credentials table password column of varying caracter", () => {
+    test("credentials table has password column of varying caracter", () => {
       return db
         .query(
           `SELECT column_name, data_type
@@ -141,6 +141,18 @@ describe("seed", () => {
         )
         .then(({ rows: [column] }) => {
           expect(column.column_name).toBe("password");
+        });
+    });
+    test("credentials table has username column of varying caracter", () => {
+      return db
+        .query(
+          `SELECT column_name, data_type
+                      FROM information_schema.columns
+                      WHERE table_name = 'credentials'
+                      AND column_name = 'username';`
+        )
+        .then(({ rows: [column] }) => {
+          expect(column.column_name).toBe("username");
         });
     });
   });

@@ -41,7 +41,7 @@ const seed = ({
     .then(()=>{
       const formattedUserData = formatFunc(userData)
       const usersString = format(
-        `INSERT INTO users (username, first_name, last_name, timezone, date_of_birth, avatar_url) VALUES %L RETURNING *`, formattedUserData
+        `INSERT INTO users (first_name, last_name, username, timezone, date_of_birth, avatar_url) VALUES %L RETURNING *`, formattedUserData
       )
       return db.query(usersString)
     })
@@ -61,7 +61,7 @@ function createUsers() {
     last_name VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL, 
     date_of_birth DATE NOT NULL, 
-    avatar_url VARCHAR(100) 
+    avatar_url VARCHAR(1000) 
     )`)
 }
 
