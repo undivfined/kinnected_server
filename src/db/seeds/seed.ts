@@ -48,7 +48,7 @@ function createUsers() {
 
 function createCredentials(){
   return db.query(`CREATE TABLE credentials(
-    username VARCHAR(50) NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username)
+    username VARCHAR(50) NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username),
     password VARCHAR(15) NOT NULL
     )`)
 }
@@ -60,7 +60,7 @@ function createCards(){
     name VARCHAR(50) NOT NULL,
     timezone VARCHAR(50) NOT NULL,
     date_of_birth DATE,
-    date_of_last_contact DATE 
+    date_of_last_contact DATE DEFAULT NULL
     )`)
 }
 
