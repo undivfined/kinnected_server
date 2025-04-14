@@ -271,19 +271,19 @@ describe("seed", () => {
           expect(exists).toBe(true);
         });
     });
-    test("connections table has pair_id column as the primary key", () => {
+    test("connections table has connection_id column as the primary key", () => {
       return db
         .query(
           `SELECT column_name, data_type, column_default
                       FROM information_schema.columns
                       WHERE table_name = 'connections'
-                      AND column_name = 'pair_id';`
+                      AND column_name = 'connection_id';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe("pair_id");
+          expect(column.column_name).toBe("connection_id");
           expect(column.data_type).toBe("integer");
           expect(column.column_default).toBe(
-            "nextval('connections_pair_id_seq'::regclass)"
+            "nextval('connections_connection_id_seq'::regclass)"
           );
         });
     });
@@ -329,7 +329,7 @@ describe("seed", () => {
     test("connections table has date_of_last_contact column of timestamp", () => {
       return db
         .query(
-          `SELECT column_name, character_maximum_length
+          `SELECT column_name, data_type
                         FROM information_schema.columns
                         WHERE table_name = 'connections'
                         AND column_name = 'date_of_last_contact';`
@@ -354,54 +354,34 @@ describe("seed", () => {
     });
   });
 
-  // describe("data insertion", () => {
-  //   test("topics data has been inserted correctly", () => {
-  //     return db.query(`SELECT * FROM topics;`).then(({ rows: topics }) => {
-  //       expect(topics).toHaveLength(3);
-  //       topics.forEach((topic) => {
-  //         expect(topic).toHaveProperty("slug");
-  //         expect(topic).toHaveProperty("description");
-  //         expect(topic).toHaveProperty("img_url");
-  //       });
-  //     });
-  //   });
-  //   test("users data has been inserted correctly", () => {
-  //     return db.query(`SELECT * FROM users;`).then(({ rows: users }) => {
-  //       expect(users).toHaveLength(4);
-  //       users.forEach((user) => {
-  //         expect(user).toHaveProperty("username");
-  //         expect(user).toHaveProperty("name");
-  //         expect(user).toHaveProperty("avatar_url");
-  //       });
-  //     });
-  //   });
-  //   test("articles data has been inserted correctly", () => {
-  //     return db.query(`SELECT * FROM articles;`).then(({ rows: articles }) => {
-  //       expect(articles).toHaveLength(13);
-  //       articles.forEach((article) => {
-  //         expect(article).toHaveProperty("article_id");
-  //         expect(article).toHaveProperty("title");
-  //         expect(article).toHaveProperty("topic");
-  //         expect(article).toHaveProperty("author");
-  //         expect(article).toHaveProperty("body");
-  //         expect(article).toHaveProperty("created_at");
-  //         expect(article).toHaveProperty("votes");
-  //         expect(article).toHaveProperty("article_img_url");
-  //       });
-  //     });
-  //   });
-  //   test("comments data has been inserted correctly", () => {
-  //     return db.query(`SELECT * FROM comments;`).then(({ rows: comments }) => {
-  //       expect(comments).toHaveLength(18);
-  //       comments.forEach((comment) => {
-  //         expect(comment).toHaveProperty("comment_id");
-  //         expect(comment).toHaveProperty("body");
-  //         expect(comment).toHaveProperty("article_id");
-  //         expect(comment).toHaveProperty("author");
-  //         expect(comment).toHaveProperty("votes");
-  //         expect(comment).toHaveProperty("created_at");
-  //       });
-  //     });
-  //   });
-  // });
+  describe("data insertion", () => {
+    test("users data has been inserted correctly", () => {
+      return db.query(`SELECT * FROM users;`).then(({ rows: users }) => {
+        expect(users).toHaveLength(15);
+        users.forEach((user) => {
+          expect(user).toHaveProperty("first_name");
+          expect(user).toHaveProperty("last_name");
+          expect(user).toHaveProperty("username");
+          expect(user).toHaveProperty("timezone");
+          expect(user).toHaveProperty("date_of_birth");
+          expect(user).toHaveProperty("avatar_url");
+        });
+      });
+    });
+    test("cards data has been inserted correctly", () => {
+      return db.query(`SELECT * FROM cards;`).then(({ rows: cards }) => {
+        expect(cards).toHaveLength(15);
+        cards.forEach((card) => {
+          expect(card).toHaveProperty("card_id");
+          expect(card).toHaveProperty("creator_username");
+          expect(card).toHaveProperty("type_of_relationship");
+          expect(card).toHaveProperty("name");
+          expect(card).toHaveProperty("timezone");
+          expect(card).toHaveProperty("date_of_birth");
+
+          expect(card).toHaveProperty("date_of_last_contact");
+        });
+      });
+    });
+  });
 });
