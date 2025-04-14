@@ -144,7 +144,6 @@ describe("seed", () => {
         });
     });
   });
-
   describe("cards table", () => {
     test("cards table exists", () => {
       return db
@@ -255,8 +254,7 @@ describe("seed", () => {
         });
     });
   });
-
-  xdescribe("connections table", () => {
+  describe("connections table", () => {
     test("connections table exists", () => {
       return db
         .query(

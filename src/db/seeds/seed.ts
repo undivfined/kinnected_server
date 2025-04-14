@@ -1,6 +1,8 @@
+import format from "pg-format";
 import db from "../connection";
 
 import { Users, Credentials, Connections, Cards } from "../dataTypes";
+import { formatFunc } from "./utils";
 
 const seed = ({
   userData,
@@ -33,6 +35,23 @@ const seed = ({
     .then(()=>{
       return createCards();
     })
+    .then(()=>{
+      return createConnections();
+    })
+    .then(()=>{
+      const formattedUserData = formatFunc(userData)
+      const usersString = format(
+        `INSERT INTO users (username, first_name, last_name, timezone, date_of_birth, avatar_url) VALUES %L RETURNING *`, formattedUserData
+      )
+      return db.query(usersString)
+    })
+    .then(()=>{
+      const formattedCredentialData = formatFunc(credentialsData)
+      const credentialsString = format(
+        `INSERT INTO credentials (username, password) VALUES %L RETURNING *`, formattedCredentialData
+      )
+      return db.query(credentialsString)
+    })
 };
 
 function createUsers() {
@@ -48,7 +67,8 @@ function createUsers() {
 
 function createCredentials(){
   return db.query(`CREATE TABLE credentials(
-    username VARCHAR(50) PRIMARY KEY NOT NULL, CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username),
+    credentials_id SERIAL PRIMARY KEY, 
+    username VARCHAR(50) REFERENCES users(username) NOT NULL,
     password VARCHAR(15) NOT NULL
     )`)
 }
@@ -62,6 +82,17 @@ function createCards(){
     timezone VARCHAR(50) NOT NULL,
     date_of_birth DATE,
     date_of_last_contact TIMESTAMP DEFAULT NULL
+    )`)
+}
+
+function createConnections(){
+  return db.query(`CREATE TABLE connections(
+    connection_id SERIAL PRIMARY KEY, 
+    username_1 VARCHAR(50) NOT NULL, CONSTRAINT fk_username_1 FOREIGN KEY (username_1) REFERENCES users(username),
+    username_2 VARCHAR(50) NOT NULL, CONSTRAINT fk_username_2 FOREIGN KEY (username_2) REFERENCES users(username),
+    type_of_relationship VARCHAR(50), 
+    date_of_last_contact TIMESTAMP DEFAULT NULL,
+    messaging_link VARCHAR(50)
     )`)
 }
 
