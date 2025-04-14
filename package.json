@@ -1,11 +1,11 @@
 {
-  "name": "chris-backend-test",
+  "name": "kinnected",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc --build",
-    "run-seed": "node ./dist/db/seeds/run-seed.js",
+    "seed-dev": "node ./dist/db/seeds/run-seed.js",
     "start": "node ./dist/listen.js",
     "start-dev": "nodemon ./src/listen.ts",
     "setup-dbs": "psql -f ./src/db/setup-dbs.sql"
