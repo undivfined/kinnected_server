@@ -121,7 +121,8 @@ function createConnections() {
     username_2 VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     type_of_relationship VARCHAR(50), 
     date_of_last_contact TIMESTAMP DEFAULT NULL,
-    messaging_link VARCHAR(50)
+    messaging_link VARCHAR(50),
+    UNIQUE (username_1, username_2)
     )`);
 }
 
