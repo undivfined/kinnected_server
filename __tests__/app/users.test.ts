@@ -57,3 +57,45 @@ describe("GET /api/users", () => {
     });
   });
 });
+describe("POST /api/users", () => {
+  test("201: Responds with an object representing the newly created user", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "new_user",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "123456789",
+      })
+      .expect(201)
+      .then(({ body: { user } }) => {
+        expect(user).toMatchObject({
+          username: "new_user",
+          first_name: "John",
+          last_name: "Doe",
+          timezone: "America/New_York",
+          date_of_birth: "1996-07-07T23:00:00.000Z",
+          avatar_url: null,
+          password: "123456789",
+        });
+      });
+  });
+  test.only("400: Responds with bad request if a user with the given username already exists", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "sofmartz",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "123456789",
+      })
+      .expect(400)
+      .then(({ body: { msg } }) => {
+        expect(msg).toBe("A user with this username already exists");
+      });
+  });
+});

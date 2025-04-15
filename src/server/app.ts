@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUsers } from "./controllers/users.controllers";
+import { getUsers, postUser } from "./controllers/users.controllers";
 
 const app = express();
 
@@ -8,6 +8,6 @@ app.use(express.json());
 
 app.get("/api/users", getUsers);
 
-// app.post("/api/users", postUser);
+app.post("/api/users", postUser);
 
 export default app;
