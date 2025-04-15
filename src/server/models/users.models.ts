@@ -33,13 +33,16 @@ export function addUser(newUser: CreateUserDto) {
     avatar_url,
     password,
   } = newUser;
+  if (!password) {
+    return Promise.reject({ status: 400, message: "Bad Request" });
+  }
   return db
     .query(`SELECT * FROM users WHERE username = $1`, [username])
     .then(({ rows }) => {
       if (rows.length !== 0) {
         return Promise.reject({
           status: 400,
-          msg: "A user with this username already exists",
+          message: "A user with this username already exists",
         });
       } else {
         return db.query(
@@ -58,23 +61,28 @@ export function addUser(newUser: CreateUserDto) {
     .then(() => {
       return db.query(
         `SELECT users.*, credentials.password FROM users JOIN credentials
-        ON users.username=credentials.username WHERE users.username=$1`,
+      ON users.username=credentials.username WHERE users.username=$1`,
         [username]
       );
     })
     .then(({ rows: [user] }) => {
-      if (user.password) {
-        return user;
+      if (!user.password) {
+        return db
+          .query(`DELETE FROM users WHERE username = $1`, [username])
+          .then(() => {
+            // Aware that this is a nested then-block but cannot figure out another way to make sure both deleting
+            // and rejecting the promise happen if the condition is met. This is a check for the unlikely case when
+            // something happened in between the username being saved in users and the password being saved in passwords,
+            // as we do not want users in users that do not have passwords.
+            return Promise.reject({
+              status: 500,
+              message: "Something went wrong, please try again later",
+            });
+          });
       }
 
-      return Promise.reject({
-        status: 500,
-        msg: "Something went wrong, please try again later",
-      });
-    })
-    .catch((error) => {
-      if (error.status === 500) {
-        db.query(`DELETE FROM users WHERE username = $1`, [username]);
+      if (user.password) {
+        return user;
       }
     });
 }

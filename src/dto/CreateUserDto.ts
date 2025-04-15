@@ -4,7 +4,6 @@ export interface CreateUserDto {
   last_name: string;
   timezone: string;
   date_of_birth: string;
-
   avatar_url?: string;
   password: string;
 }
