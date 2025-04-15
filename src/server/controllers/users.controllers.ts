@@ -8,3 +8,6 @@ export function getUsers(request: Request, response: Response) {
     response.status(200).send({ users });
   });
 }
+
+export function postUsers(request: Request, response: Response) {
+}

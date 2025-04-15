@@ -115,4 +115,27 @@ describe("/api/connections", () => {
         });
     });
   });
+  describe("DELETE", () => {
+    test("204: Deletes the given connection by connection_id", () => {
+      return request(app).delete("/api/connections/5").expect(204);
+    });
+    test("400: Responds with bad request when given invalid connection_id", () => {
+      return request(app)
+        .delete("/api/connections/banana")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.message).toBe("bad request");
+        });
+    });
+    test("404: Responds with not found when given valid connection_id which doesn't exist", () => {
+      return request(app)
+        .delete("/api/connections/58")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("not found");
+        });
+    });
+  });
 });
+
+

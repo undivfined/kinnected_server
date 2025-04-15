@@ -13,3 +13,7 @@ export function createConnection(connection: connectionObject){
         return rows[0]
     })
 }
+
+export function removeConnectionById(connection_id: number){
+    return db.query(`DELETE FROM connections WHERE connection_id = $1`, [connection_id]);
+  };
