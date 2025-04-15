@@ -17,15 +17,15 @@ const seed = ({
   cardData: Cards;
 }) => {
   return db
-    .query("DROP TABLE IF EXISTS credentials CASCADE")
+    .query("DROP TABLE IF EXISTS credentials")
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS connections CASCADE");
+      return db.query("DROP TABLE IF EXISTS connections");
     })
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS cards CASCADE");
+      return db.query("DROP TABLE IF EXISTS cards");
     })
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS users CASCADE");
+      return db.query("DROP TABLE IF EXISTS users");
     })
     .then(() => {
       return createUsers();

@@ -5,7 +5,7 @@ import { connectionObject } from "../../db/dataTypes";
 
 export function postConnection(request: Request<{}, {}, connectionObject>,response : Response, next: NextFunction) {
     const connection = request.body;
-    createConnection(connection, next).then((createdConnection) => {
+    createConnection(connection).then((createdConnection) => {
         response.status(201).send({createdConnection})
     })
     .catch((error) => {

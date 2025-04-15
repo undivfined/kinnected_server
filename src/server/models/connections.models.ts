@@ -3,7 +3,7 @@ import db from "../../db/connection";
 import { NextFunction } from "express";
 
 
-export function createConnection(connection: connectionObject, next: NextFunction){
+export function createConnection(connection: connectionObject){
     const {username_1, username_2, type_of_relationship, date_of_last_contact, messaging_link} = connection; 
 
     return db.query(
@@ -12,7 +12,4 @@ export function createConnection(connection: connectionObject, next: NextFunctio
     ).then(({rows})=>{
         return rows[0]
     })
-    .catch((error) => {
-        next(error);
-      });
 }
