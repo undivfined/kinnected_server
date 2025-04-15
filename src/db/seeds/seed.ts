@@ -17,15 +17,15 @@ const seed = ({
   cardData: Cards;
 }) => {
   return db
-    .query("DROP TABLE IF EXISTS credentials")
+    .query("DROP TABLE IF EXISTS credentials CASCADE")
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS connections");
+      return db.query("DROP TABLE IF EXISTS connections CASCADE");
     })
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS cards");
+      return db.query("DROP TABLE IF EXISTS cards CASCADE");
     })
     .then(() => {
-      return db.query("DROP TABLE IF EXISTS users");
+      return db.query("DROP TABLE IF EXISTS users CASCADE");
     })
     .then(() => {
       return createUsers();
@@ -121,7 +121,8 @@ function createConnections() {
     username_2 VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     type_of_relationship VARCHAR(50), 
     date_of_last_contact TIMESTAMP DEFAULT NULL,
-    messaging_link VARCHAR(50)
+    messaging_link VARCHAR(50),
+    UNIQUE (username_1, username_2)
     )`);
 }
 

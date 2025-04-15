@@ -1,9 +1,9 @@
 import { connectionObject } from "../../db/dataTypes";
-import { CreateUserDto } from "../../dto/CreateUserDto"
 import db from "../../db/connection";
+import { NextFunction } from "express";
 
 
-export function createConnection(connection: connectionObject){
+export function createConnection(connection: connectionObject, next: NextFunction){
     const {username_1, username_2, type_of_relationship, date_of_last_contact, messaging_link} = connection; 
 
     return db.query(
@@ -12,5 +12,7 @@ export function createConnection(connection: connectionObject){
     ).then(({rows})=>{
         return rows[0]
     })
-
+    .catch((error) => {
+        next(error);
+      });
 }
