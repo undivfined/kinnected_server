@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const pg_format_1 = __importDefault(require("pg-format"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const connection_1 = __importDefault(require("../connection"));
 const utils_1 = require("./utils");
 const seed = ({ userData, credentialsData, connectionsData, cardData, }) => {
@@ -36,7 +37,15 @@ const seed = ({ userData, credentialsData, connectionsData, cardData, }) => {
         return connection_1.default.query(usersString);
     })
         .then(() => {
-        const formattedCredentialData = (0, utils_1.formatFunc)(credentialsData);
+        return Promise.all(credentialsData.map((credential) => {
+            return bcrypt_1.default.hash(credential.password, 10);
+        }));
+    })
+        .then((hashedPasswords) => {
+        const dataWithHashedPasswords = hashedPasswords.map((password, i) => {
+            return { username: credentialsData[i].username, password: password };
+        });
+        const formattedCredentialData = (0, utils_1.formatFunc)(dataWithHashedPasswords);
         const credentialsString = (0, pg_format_1.default)(`INSERT INTO credentials (username, password) VALUES %L RETURNING *`, formattedCredentialData);
         return connection_1.default.query(credentialsString);
     })
@@ -65,7 +74,7 @@ function createCredentials() {
     return connection_1.default.query(`CREATE TABLE credentials(
     credentials_id SERIAL PRIMARY KEY, 
     username VARCHAR(50)  NOT NULL REFERENCES users(username) ON DELETE CASCADE,
-    password VARCHAR(15) NOT NULL
+    password VARCHAR(100) NOT NULL
     )`);
 }
 function createCards() {
