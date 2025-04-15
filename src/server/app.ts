@@ -1,13 +1,13 @@
-import  express  from "express";
+import express from "express";
 
-import { getUsers, postUser } from "./controllers/users"
+import { getUsers } from "./controllers/users.controllers";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/api/users", getUsers)
+app.get("/api/users", getUsers);
 
-app.post("/api/users", postUser)
+// app.post("/api/users", postUser);
 
-export default app
+export default app;
