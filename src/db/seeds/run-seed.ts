@@ -1,10 +1,10 @@
 import seed from "./seed";
 import db from "../connection";
 
+import * as data from "../data/development/index";
+
 const runSeed = () => {
-  return seed({
-    userData: [{ firstName: "FirstName", secondName: "SecondName" }],
-  }).then(() => db.end());
+  return seed(data).then(() => db.end());
 };
 
 runSeed();

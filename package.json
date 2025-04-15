@@ -1,11 +1,11 @@
 {
-  "name": "chris-backend-test",
+  "name": "kinnected",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "build": "tsc --build",
-    "run-seed": "node ./dist/db/seeds/run-seed.js",
+    "seed-dev": "node ./dist/db/seeds/run-seed.js",
     "start": "node ./dist/listen.js",
     "start-dev": "nodemon ./src/listen.ts",
     "setup-dbs": "psql -f ./src/db/setup-dbs.sql"
@@ -15,16 +15,23 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/pg": "^8.11.11",
+    "@types/pg-format": "^1.0.5",
+    "@types/supertest": "^6.0.3",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "nodemon": "^3.1.9",
-    "pg": "^8.14.1"
+    "pg": "^8.14.1",
+    "supertest": "^7.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
+    "pg-format": "^1.0.4",
+    "supertest": "^7.1.0",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
