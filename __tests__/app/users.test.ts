@@ -57,3 +57,93 @@ describe("GET /api/users", () => {
     });
   });
 });
+describe("POST /api/users", () => {
+  test("201: Responds with an object representing the newly created user", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "new_user",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "123456789",
+      })
+      .expect(201)
+      .then(({ body: { user } }) => {
+        expect(user).toMatchObject({
+          username: "new_user",
+          first_name: "John",
+          last_name: "Doe",
+          timezone: "America/New_York",
+          date_of_birth: "1996-07-07T23:00:00.000Z",
+          avatar_url: null,
+          password: "123456789",
+        });
+      });
+  });
+  test("400: Responds with bad request if a user with the given username already exists", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "sofmartz",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "123456789",
+      })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("A user with this username already exists");
+      });
+  });
+  test("400: Responds with Bad Request in case the password in not valid", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "new_user",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "",
+      })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("Bad Request");
+      });
+  });
+  test("400: Responds with Bad Request if any of the required properies are missing", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "new_user",
+
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: "1996-07-08",
+        password: "1234456",
+      })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("bad request");
+      });
+  });
+  test("400: Responds with Bad Request if any of the properies are of the wrong data type", () => {
+    return request(app)
+      .post("/api/users")
+      .send({
+        username: "new_user",
+        first_name: "John",
+        last_name: "Doe",
+        timezone: "America/New_York",
+        date_of_birth: 123,
+        password: "1234456",
+      })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("bad request");
+      });
+  });
+});

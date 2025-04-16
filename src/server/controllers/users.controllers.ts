@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
-import { fetchUsers } from "../models/users.models";
+import { NextFunction, Request, Response } from "express";
+import { addUser, fetchUsers } from "../models/users.models";
+import { CreateUserDto } from "../../dto/CreateUserDto";
 
 export function getUsers(request: Request, response: Response) {
   const { search } = request.query;
@@ -9,5 +10,34 @@ export function getUsers(request: Request, response: Response) {
   });
 }
 
-export function postUsers(request: Request, response: Response) {
-}
+export function postUser(
+  request: Request<{}, {}, CreateUserDto>,
+  response: Response,
+  next: NextFunction
+) {
+  const {
+    username,
+    first_name,
+    last_name,
+    timezone,
+    date_of_birth,
+    avatar_url,
+    password,
+  } = request.body;
+
+  addUser({
+    username,
+    first_name,
+    last_name,
+    timezone,
+    date_of_birth,
+    avatar_url,
+    password,
+  })
+    .then((user) => {
+      response.status(201).send({ user });
+    })
+    .catch((error) => {
+      console.log(error);
+      next(error);
+    });

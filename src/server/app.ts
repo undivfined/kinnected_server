@@ -1,8 +1,13 @@
 import express from "express";
 
-import { deleteConnectionById, postConnection } from "./controllers/connections.controllers";
-import { handleCustomErrors, handlePsqlErrors, handleServerErrors } from "./controllers/errors.controllers";
-import { getUsers, postUsers } from "./controllers/users.controllers";
+
+import { getUsers, postUser } from "./controllers/users.controllers";
+import { postConnection, postConnection } from "./controllers/connections.controllers";
+import {
+  handleCustomErrors,
+  handlePsqlErrors,
+  handleServerErrors,
+} from "./controllers/errors.controllers";
 
 
 const app = express();
@@ -11,16 +16,17 @@ app.use(express.json());
 
 app.get("/api/users", getUsers);
 
-app.post("/api/users", postUsers);
+
+app.post("/api/users", postUser);
 
 
-app.post("/api/connections", postConnection)
+app.post("/api/connections", postConnection);
 
 app.delete("/api/connections/:connection_id", deleteConnectionById)
 
 app.use((request, response, next) => {
-    response.status(404).send({ message: "path not found" });
-})
+  response.status(404).send({ message: "path not found" });
+});
 
 app.use(handlePsqlErrors);
 
@@ -28,5 +34,4 @@ app.use(handleCustomErrors);
 
 app.use(handleServerErrors);
 
-export default app
-
+export default app;
