@@ -181,7 +181,7 @@ describe("GET /api/users/:username/contacts", () => {
         contacts.forEach((contact: ContactResponse) => {
           expect(contact).toMatchObject(
             expect.objectContaining({
-              id: expect.any(Number),
+              contact_id: expect.any(Number),
               name: expect.any(String),
               timezone: expect.any(String),
               isCard: expect.any(Boolean),
@@ -194,12 +194,20 @@ describe("GET /api/users/:username/contacts", () => {
         });
       });
   });
-  test("404: Responds with not found if no records are found for the provide username", () => {
+  test("404: Responds with not found if no records are found for the provided username", () => {
     return request(app)
       .get("/api/users/not_a_user/contacts")
       .expect(404)
       .then(({ body: { message } }) => {
-        expect(message).toBe("Not Found");
+        expect(message).toBe("not found");
+      });
+  });
+  test("200: Responds with an empty array if a user has no contacts", () => {
+    return request(app)
+      .get("/api/users/amaraj_93/contacts")
+      .expect(200)
+      .then(({ body: { contacts } }) => {
+        expect(contacts.length).toBe(0);
       });
   });
 });

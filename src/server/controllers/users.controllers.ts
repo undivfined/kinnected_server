@@ -73,7 +73,6 @@ export function getContactsByUsername(
       response.status(200).send({ contacts });
     })
     .catch((error) => {
-      console.log(error);
       next(error);
     });
 }
