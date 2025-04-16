@@ -38,6 +38,6 @@ export function postUser(
       response.status(201).send({ user });
     })
     .catch((error) => {
-      console.log(error);
       next(error);
     });
+}
