@@ -147,3 +147,21 @@ describe("POST /api/users", () => {
       });
   });
 });
+describe("GET /api/users/:username", () => {
+  test.only("200: Responds with a user object", () => {
+    return request(app)
+      .get("/api/users/amaraj_93")
+      .expect(200)
+      .then(({ body }) => {
+        const user = body.user
+          expect(user).toMatchObject({
+            username: expect.any(String),
+            first_name: expect.any(String),
+            last_name: expect.any(String),
+            timezone: expect.any(String),
+            date_of_birth: expect.any(String),
+            avatar_url: expect.any(String),
+          });
+        });
+      });
+    });

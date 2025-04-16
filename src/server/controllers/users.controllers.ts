@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { addUser, fetchUsers } from "../models/users.models";
+import { addUser, fetchUsers, fetchUserByUsername } from "../models/users.models";
 import { CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
@@ -40,4 +40,11 @@ export function postUser(
     .catch((error) => {
       next(error);
     });
+}
+export function getUserByUsername(request: Request, response: Response) {
+  const {username}  = request.params;
+console.log(username)
+  fetchUserByUsername(username).then((user) => {
+    response.status(200).send({ user });
+  });
 }

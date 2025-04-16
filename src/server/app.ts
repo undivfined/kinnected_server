@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUsers, postUser } from "./controllers/users.controllers";
+import { getUserByUsername, getUsers, postUser } from "./controllers/users.controllers";
 import {
   postConnection,
   deleteConnectionById,
@@ -22,6 +22,8 @@ app.post("/api/users", postUser);
 app.post("/api/connections", postConnection);
 
 app.delete("/api/connections/:connection_id", deleteConnectionById);
+
+app.get("/api/users/:username", getUserByUsername)
 
 app.use((request, response, next) => {
   response.status(404).send({ message: "path not found" });
