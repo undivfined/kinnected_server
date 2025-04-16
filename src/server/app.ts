@@ -1,6 +1,10 @@
 import express from "express";
 
-import { getUsers, postUser } from "./controllers/users.controllers";
+import {
+  getUsers,
+  postUser,
+  getCredentialByUsername,
+} from "./controllers/users.controllers";
 import {
   postConnection,
   deleteConnectionById,
@@ -18,6 +22,8 @@ app.use(express.json());
 app.get("/api/users", getUsers);
 
 app.post("/api/users", postUser);
+
+app.get("/api/users/:username/credentials", getCredentialByUsername);
 
 app.post("/api/connections", postConnection);
 
