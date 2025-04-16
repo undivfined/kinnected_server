@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pg_format_1 = __importDefault(require("pg-format"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const connection_1 = __importDefault(require("../connection"));
-const utils_1 = require("./utils");
+const utils_1 = require("../../utils");
 const seed = ({ userData, credentialsData, connectionsData, cardData, }) => {
     return connection_1.default
         .query("DROP TABLE IF EXISTS credentials")
@@ -73,7 +73,7 @@ function createUsers() {
 function createCredentials() {
     return connection_1.default.query(`CREATE TABLE credentials(
     credentials_id SERIAL PRIMARY KEY, 
-    username VARCHAR(50)  NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    username VARCHAR(50) UNIQUE NOT NULL REFERENCES users(username)  ON DELETE CASCADE,
     password VARCHAR(100) NOT NULL
     )`);
 }
@@ -95,7 +95,8 @@ function createConnections() {
     username_2 VARCHAR(50) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
     type_of_relationship VARCHAR(50), 
     date_of_last_contact TIMESTAMP DEFAULT NULL,
-    messaging_link VARCHAR(50)
+    messaging_link VARCHAR(50),
+    UNIQUE (username_1, username_2)
     )`);
 }
 exports.default = seed;

@@ -184,13 +184,6 @@ exports.default = [
         messaging_link: "",
     },
     {
-        username_1: "tyler_crane",
-        username_2: "jonathan_casey",
-        type_of_relationship: "Family",
-        date_of_last_contact: null,
-        messaging_link: "",
-    },
-    {
         username_1: "jrodriguez_hq",
         username_2: "steven91",
         type_of_relationship: "Friend",
