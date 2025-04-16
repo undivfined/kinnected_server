@@ -1,12 +1,12 @@
 import express from "express";
-
+import cors from "cors";
 
 import {
   getUsers,
   postUser,
   getCredentialByUsername,
   getContactsByUsername,
-  getUserByUsername
+  getUserByUsername,
 } from "./controllers/users.controllers";
 
 import {
@@ -22,6 +22,8 @@ import {
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.json());
 
 app.get("/api/users", getUsers);
@@ -36,11 +38,9 @@ app.post("/api/connections", postConnection);
 
 app.delete("/api/connections/:connection_id", deleteConnectionById);
 
-
-app.get("/api/users/:username", getUserByUsername)
+app.get("/api/users/:username", getUserByUsername);
 
 app.patch("/api/connections/:connection_id", patchConnectionById);
-
 
 app.use((request, response, next) => {
   response.status(404).send({ message: "path not found" });
