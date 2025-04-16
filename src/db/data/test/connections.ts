@@ -1,6 +1,6 @@
 export default [
   {
-    username_1: "sofmartz",
+    username_1: "amaraj_93",
     username_2: "liamc2020",
     type_of_relationship: "Friend",
     date_of_last_contact: "2025-04-01T12:45:00Z",
@@ -63,7 +63,8 @@ export default [
     messaging_link: "",
   },
   {
-    username_1: "emjay23",
+    username_1: "k_osei",
+
     username_2: "z_ali_01",
     type_of_relationship: null,
     date_of_last_contact: null,

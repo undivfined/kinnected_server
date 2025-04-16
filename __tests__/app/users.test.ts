@@ -157,27 +157,26 @@ describe("GET /api/users/:username", () => {
       .get("/api/users/amaraj_93")
       .expect(200)
       .then(({ body }) => {
-        const user = body.user
-          expect(user).toMatchObject({
-            username: expect.any(String),
-            first_name: expect.any(String),
-            last_name: expect.any(String),
-            timezone: expect.any(String),
-            date_of_birth: expect.any(String),
-            avatar_url: expect.any(String),
-          });
+        const user = body.user;
+        expect(user).toMatchObject({
+          username: expect.any(String),
+          first_name: expect.any(String),
+          last_name: expect.any(String),
+          timezone: expect.any(String),
+          date_of_birth: expect.any(String),
+          avatar_url: expect.any(String),
         });
       });
-        });
-        test("GET 404: responds with 'not found' ", () => {
-          return request(app)
-            .get("/api/users/notausersusername")
-            .expect(404)
-            .then(({ body: { message }}) => {
-              expect(message).toBe("path not found");
-            });
-          })
-
+  });
+});
+test("GET 404: responds with 'not found' ", () => {
+  return request(app)
+    .get("/api/users/notausersusername")
+    .expect(404)
+    .then(({ body: { message } }) => {
+      expect(message).toBe("path not found");
+    });
+});
 
 describe("GET /api/users/:username/credentials", () => {
   test("200: Returns an object with the username and the hashed password string", () => {
@@ -232,11 +231,10 @@ describe("GET /api/users/:username/contacts", () => {
   });
   test("200: Responds with an empty array if a user has no contacts", () => {
     return request(app)
-      .get("/api/users/amaraj_93/contacts")
+      .get("/api/users/emjay23/contacts")
       .expect(200)
       .then(({ body: { contacts } }) => {
         expect(contacts.length).toBe(0);
       });
   });
 });
-

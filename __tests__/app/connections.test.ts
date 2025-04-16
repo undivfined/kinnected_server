@@ -33,13 +33,15 @@ describe("/api/connections", () => {
         .expect(201)
         .then(({ body }) => {
           expect(body.createdConnection).toMatchObject({
-              username_1: "amaraj_93",
-              username_2: "z_ali_01",
-              type_of_relationship: "Friend",
-              date_of_last_contact: "2025-01-01T12:45:00.000Z",
-              messaging_link: "",
-            });
-            expect(body.createdConnection.connection_id).toEqual(expect.any(Number));
+            username_1: "amaraj_93",
+            username_2: "z_ali_01",
+            type_of_relationship: "Friend",
+            date_of_last_contact: "2025-01-01T12:45:00.000Z",
+            messaging_link: "",
+          });
+          expect(body.createdConnection.connection_id).toEqual(
+            expect.any(Number)
+          );
         });
     });
     test("400: Responds with bad request when request body does not contain required properties", () => {
@@ -107,11 +109,13 @@ describe("/api/connections", () => {
         })
         .expect(201)
         .then(({ body }) => {
-            expect(body.createdConnection).toMatchObject({
-                username_1: "liamc2020",
-                username_2: "amaraj_93",
-              });
-              expect(body.createdConnection.connection_id).toEqual(expect.any(Number));
+          expect(body.createdConnection).toMatchObject({
+            username_1: "liamc2020",
+            username_2: "amaraj_93",
+          });
+          expect(body.createdConnection.connection_id).toEqual(
+            expect.any(Number)
+          );
         });
     });
   });
@@ -150,18 +154,20 @@ describe("/api/connections", () => {
               username_1: "amaraj_93",
               username_2: "liamc2020",
               type_of_relationship: "Partner",
-              date_of_last_contact: "2025-04-01T12:45:00.000Z",
+              date_of_last_contact: "2025-04-01T11:45:00.000Z",
               messaging_link: "",
             },
-          })
-          expect(body.updatedConnection.connection_id).toEqual(expect.any(Number));;
+          });
+          expect(body.updatedConnection.connection_id).toEqual(
+            expect.any(Number)
+          );
         });
     });
     test("200: Updates date_of_last_contact values of a connection object specified by connection_id, responding with updated connection, leaving other property values unchanged", () => {
       return request(app)
         .patch("/api/connections/1")
         .send({
-          date_of_last_contact: "2025-03-12T12:45:00Z"
+          date_of_last_contact: "2025-03-12T12:45:00Z",
         })
         .expect(200)
         .then(({ body }) => {
@@ -181,7 +187,7 @@ describe("/api/connections", () => {
         .patch("/api/connections/1")
         .send({
           type_of_relationship: "Family",
-          date_of_last_contact: "2025-03-12T12:45:00Z"
+          date_of_last_contact: "2025-03-12T12:45:00Z",
         })
         .expect(200)
         .then(({ body }) => {
@@ -199,7 +205,7 @@ describe("/api/connections", () => {
     test("400: Responds with bad request when request body is missing required properties", () => {
       return request(app)
         .patch("/api/connections/1")
-        .send({ some_other_field: "blahblah", })
+        .send({ some_other_field: "blahblah" })
         .expect(400)
         .then(({ body }) => {
           expect(body.message).toBe("bad request");
@@ -229,5 +235,3 @@ describe("/api/connections", () => {
     });
   });
 });
-
-
