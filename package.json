@@ -1,14 +1,15 @@
 {
   "name": "kinnected",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "listen.js",
   "scripts": {
     "test": "jest --runInBand",
     "build": "tsc --build",
     "seed-dev": "node ./dist/db/seeds/run-seed.js",
     "start": "node ./dist/listen.js",
     "start-dev": "nodemon ./src/listen.ts",
-    "setup-dbs": "psql -f ./src/db/setup-dbs.sql"
+    "setup-dbs": "psql -f ./src/db/setup-dbs.sql",
+    "seed-prod": "NODE_ENV=production npm run seed-dev"
   },
   "keywords": [],
   "author": "",

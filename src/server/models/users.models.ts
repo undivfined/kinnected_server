@@ -117,7 +117,7 @@ export function fetchContactsByUsername(username: string) {
         `SELECT connections.connection_id AS contact_id, 
       concat(users.first_name, ' ', users.last_name) AS name,
       connections.type_of_relationship, connections.date_of_last_contact, connections.messaging_link,
-      users.date_of_birth, users.timezone
+      users.date_of_birth, users.timezone, users.avatar_url
       FROM connections LEFT JOIN users on users.username = connections.username_2
       WHERE connections.username_1 = $1`,
         [username]
@@ -136,6 +136,7 @@ export function fetchContactsByUsername(username: string) {
         const cardsToReturn = cards.map((card) => {
           card.isCard = true;
           card.messaging_link = "";
+          card.avatar_url = "";
           return card;
         });
         return [...connectionsToReturn, ...cardsToReturn];

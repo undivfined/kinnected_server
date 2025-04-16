@@ -64,7 +64,6 @@ export default [
   },
   {
     username_1: "k_osei",
-
     username_2: "z_ali_01",
     type_of_relationship: null,
     date_of_last_contact: null,

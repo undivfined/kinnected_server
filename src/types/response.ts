@@ -1,12 +1,12 @@
 // response type interfaces go here
 export type ContactResponse = {
-  id: Number;
+  contact_id: number;
 
-  name: String;
-  type_of_relationship: String | undefined;
-  timezone: String;
-  date_of_birth: String | undefined;
-  date_of_last_contact: String | undefined;
-  isCard: Boolean;
-  messaging_link: String | undefined;
+  name: string;
+  type_of_relationship: string | undefined;
+  timezone: string;
+  date_of_birth: string | undefined;
+  date_of_last_contact: string | undefined;
+  isCard: boolean;
+  messaging_link: string | undefined;
 };
