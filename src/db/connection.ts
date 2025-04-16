@@ -10,6 +10,10 @@ if (!process.env.PGDATABASE && !process.env.DATABASE_URL) {
   console.log(`Connected to ${process.env.PGDATABASE}`);
 }
 
-const db = new Pool();
+let config;
 
-export default db;
+if (ENV === "production") {
+  config = { connectionString: process.env.DATABASE_URL, max: 2 };
+}
+
+export default new Pool(config);
