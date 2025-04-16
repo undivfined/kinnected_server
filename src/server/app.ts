@@ -8,6 +8,7 @@ import {
 import {
   postConnection,
   deleteConnectionById,
+  patchConnectionById,
 } from "./controllers/connections.controllers";
 import {
   handleCustomErrors,
@@ -28,6 +29,8 @@ app.get("/api/users/:username/credentials", getCredentialByUsername);
 app.post("/api/connections", postConnection);
 
 app.delete("/api/connections/:connection_id", deleteConnectionById);
+
+app.patch("/api/connections/:connection_id", patchConnectionById);
 
 app.use((request, response, next) => {
   response.status(404).send({ message: "path not found" });
