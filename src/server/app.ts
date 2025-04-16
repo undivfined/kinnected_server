@@ -4,6 +4,7 @@ import {
   getUsers,
   postUser,
   getCredentialByUsername,
+  getContactsByUsername,
 } from "./controllers/users.controllers";
 import {
   postConnection,
@@ -25,6 +26,8 @@ app.get("/api/users", getUsers);
 app.post("/api/users", postUser);
 
 app.get("/api/users/:username/credentials", getCredentialByUsername);
+
+app.get("/api/users/:username/contacts", getContactsByUsername);
 
 app.post("/api/connections", postConnection);
 
