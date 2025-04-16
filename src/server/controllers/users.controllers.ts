@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { addUser, fetchUsers } from "../models/users.models";
-import { CreateUserDto } from "../../dto/CreateUserDto";
+import { CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
   const { search } = request.query;

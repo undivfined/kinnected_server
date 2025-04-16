@@ -1,6 +1,6 @@
 import QueryString from "qs";
 import db from "../../db/connection";
-import { CreateUserDto } from "../../dto/CreateUserDto";
+import { CreateUserDto } from "../../dto/dtos";
 
 export function fetchUsers(
   search:
