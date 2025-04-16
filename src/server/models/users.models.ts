@@ -88,6 +88,15 @@ export function addUser(newUser: CreateUserDto) {
     });
 }
 
+export function fetchUserByUsername( username: string) {
+  return db.query(`SELECT * FROM users WHERE username = $1`, [username])
+  .then(({ rows }) => {
+    if (rows.length === 0){
+      return Promise.reject({ status: 404, message: "path not found" })
+  }
+    return rows[0]
+
+
 export function fetchCredentialByUsername(username: string) {
   return db
     .query(`SELECT * FROM credentials WHERE username = $1`, [username])
@@ -130,5 +139,6 @@ export function fetchContactsByUsername(username: string) {
         return [...connectionsToReturn, ...cardsToReturn];
       }
     );
+
   });
 }

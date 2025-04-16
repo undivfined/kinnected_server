@@ -1,10 +1,13 @@
 import { NextFunction, Request, Response } from "express";
+
 import {
   addUser,
   fetchCredentialByUsername,
   fetchUsers,
   fetchContactsByUsername,
+  fetchUserByUsername
 } from "../models/users.models";
+
 import { CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
@@ -47,6 +50,17 @@ export function postUser(
     });
 }
 
+export function getUserByUsername(request: Request, response: Response, next: NextFunction) {
+  const {username}  = request.params;
+  fetchUserByUsername(username).then((user) => {
+    response.status(200).send({ user });
+  })
+  .catch((error) => {
+    next(error);
+  });
+}
+
+
 export function getCredentialByUsername(
   request: Request<{ username: string }>,
   response: Response,
@@ -76,3 +90,4 @@ export function getContactsByUsername(
       next(error);
     });
 }
+

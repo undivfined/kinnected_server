@@ -151,6 +151,34 @@ describe("POST /api/users", () => {
   });
 });
 
+describe("GET /api/users/:username", () => {
+  test("200: Responds with a user object", () => {
+    return request(app)
+      .get("/api/users/amaraj_93")
+      .expect(200)
+      .then(({ body }) => {
+        const user = body.user
+          expect(user).toMatchObject({
+            username: expect.any(String),
+            first_name: expect.any(String),
+            last_name: expect.any(String),
+            timezone: expect.any(String),
+            date_of_birth: expect.any(String),
+            avatar_url: expect.any(String),
+          });
+        });
+      });
+        });
+        test("GET 404: responds with 'not found' ", () => {
+          return request(app)
+            .get("/api/users/notausersusername")
+            .expect(404)
+            .then(({ body: { message }}) => {
+              expect(message).toBe("path not found");
+            });
+          })
+
+
 describe("GET /api/users/:username/credentials", () => {
   test("200: Returns an object with the username and the hashed password string", () => {
     return request(app)
@@ -211,3 +239,4 @@ describe("GET /api/users/:username/contacts", () => {
       });
   });
 });
+
