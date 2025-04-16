@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { addUser, fetchUsers } from "../models/users.models";
+import {
+  addUser,
+  fetchCredentialByUsername,
+  fetchUsers,
+} from "../models/users.models";
 import { CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
@@ -36,6 +40,21 @@ export function postUser(
   })
     .then((user) => {
       response.status(201).send({ user });
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
+export function getCredentialByUsername(
+  request: Request<{ username: string }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  fetchCredentialByUsername(username)
+    .then((credential) => {
+      response.status(200).send({ credential });
     })
     .catch((error) => {
       next(error);

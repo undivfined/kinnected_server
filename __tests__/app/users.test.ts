@@ -4,6 +4,7 @@ import { UserObject } from "../../src/db/dataTypes";
 import seed from "../../src/db/seeds/seed";
 import * as data from "../../src/db/data/test";
 import db from "../../src/db/connection";
+import bcrypt from "bcrypt";
 
 beforeEach(() => seed(data));
 
@@ -144,6 +145,27 @@ describe("POST /api/users", () => {
       .expect(400)
       .then(({ body: { message } }) => {
         expect(message).toBe("bad request");
+      });
+  });
+});
+
+describe("GET /api/users/:username/credentials", () => {
+  test("200: Returns an object with the username and the hashed password string", () => {
+    return request(app)
+      .get("/api/users/k_osei/credentials")
+      .expect(200)
+      .then(({ body: { credential } }) => {
+        expect(credential.username).toBe("k_osei");
+        return bcrypt.compare("PalmWind01", credential.password);
+      })
+      .then((result) => expect(result).toBe(true));
+  });
+  test("404: Responds with not found if no record is found for the provide username", () => {
+    return request(app)
+      .get("/api/users/not_a_user/credentials")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("Not Found");
       });
   });
 });

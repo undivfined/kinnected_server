@@ -97,7 +97,7 @@ function createUsers() {
 function createCredentials() {
   return db.query(`CREATE TABLE credentials(
     credentials_id SERIAL PRIMARY KEY, 
-    username VARCHAR(50)  NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+    username VARCHAR(50) UNIQUE NOT NULL REFERENCES users(username)  ON DELETE CASCADE,
     password VARCHAR(100) NOT NULL
     )`);
 }
