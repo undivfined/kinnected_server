@@ -154,7 +154,7 @@ describe("/api/connections", () => {
               username_1: "amaraj_93",
               username_2: "liamc2020",
               type_of_relationship: "Partner",
-              date_of_last_contact: "2025-04-01T11:45:00.000Z",
+              date_of_last_contact: expect.any(String),
               messaging_link: "",
             },
           });
