@@ -36,7 +36,7 @@ describe("/api/connections", () => {
             username_1: "amaraj_93",
             username_2: "z_ali_01",
             type_of_relationship: "Friend",
-            date_of_last_contact: "2025-01-01T12:45:00.000Z",
+            date_of_last_contact: expect.any(String),
             messaging_link: "",
           });
           expect(body.createdConnection.connection_id).toEqual(

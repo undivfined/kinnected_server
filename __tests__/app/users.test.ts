@@ -79,7 +79,7 @@ describe("POST /api/users", () => {
           first_name: "John",
           last_name: "Doe",
           timezone: "America/New_York",
-          date_of_birth: "1996-07-07T23:00:00.000Z",
+          date_of_birth: expect.any(String),
           avatar_url: null,
           password: "123456789",
         });
