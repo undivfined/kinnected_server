@@ -4,6 +4,7 @@ import { getUsers, postUser } from "./controllers/users.controllers";
 import {
   postConnection,
   deleteConnectionById,
+  patchConnectionById,
 } from "./controllers/connections.controllers";
 import {
   handleCustomErrors,
@@ -22,6 +23,8 @@ app.post("/api/users", postUser);
 app.post("/api/connections", postConnection);
 
 app.delete("/api/connections/:connection_id", deleteConnectionById);
+
+app.patch("/api/connections/:connection_id", patchConnectionById);
 
 app.use((request, response, next) => {
   response.status(404).send({ message: "path not found" });
