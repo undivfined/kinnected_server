@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { createConnection, removeConnectionById } from "../models/connections.models";
-import { connectionObject } from "../../db/dataTypes";
 import { checkExists } from "../../utils";
+import { CreateConnectionDto } from "../../dto/CreateUserDto";
 
 type Params = { connection_id: number };
 
-export function postConnection(request: Request<{}, {}, connectionObject>,response : Response, next: NextFunction) {
+export function postConnection(request: Request<{}, {}, CreateConnectionDto>,response : Response, next: NextFunction) {
     const connection = request.body;
     createConnection(connection).then((createdConnection) => {
         response.status(201).send({createdConnection})

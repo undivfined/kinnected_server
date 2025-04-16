@@ -1,7 +1,8 @@
 import { connectionObject } from "../../db/dataTypes";
 import db from "../../db/connection";
+import { CreateConnectionDto } from "../../dto/CreateUserDto";
 
-export function createConnection(connection: connectionObject){
+export function createConnection(connection: CreateConnectionDto){
     const {username_1, username_2, type_of_relationship, date_of_last_contact, messaging_link} = connection; 
 
     return db.query(
