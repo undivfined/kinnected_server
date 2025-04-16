@@ -4,7 +4,7 @@ import db from "../../src/db/connection";
 import * as data from "../../src/db/data/test/index";
 import seed from "../../src/db/seeds/seed";
 
-beforeAll(() => seed(data));
+beforeEach(() => seed(data));
 afterAll(() => db.end());
 
 describe("/api/notAPath", () => {
@@ -36,7 +36,7 @@ describe("/api/connections", () => {
               username_1: "amaraj_93",
               username_2: "z_ali_01",
               type_of_relationship: "Friend",
-              date_of_last_contact: expect.any(String),
+              date_of_last_contact: "2025-01-01T12:45:00.000Z",
               messaging_link: "",
             });
             expect(body.createdConnection.connection_id).toEqual(expect.any(Number));
@@ -130,6 +130,98 @@ describe("/api/connections", () => {
     test("404: Responds with not found when given valid connection_id which doesn't exist", () => {
       return request(app)
         .delete("/api/connections/58")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("not found");
+        });
+    });
+  });
+  describe("PATCH", () => {
+    test("200: Updates type_of_relationship values of a connection object specified by connection_id, responding with updated connection, leaving other property values unchanged", () => {
+      return request(app)
+        .patch("/api/connections/1")
+        .send({
+          type_of_relationship: "Partner",
+        })
+        .expect(200)
+        .then(({ body }) => {
+          expect(body).toMatchObject({
+            updatedConnection: {
+              username_1: "amaraj_93",
+              username_2: "liamc2020",
+              type_of_relationship: "Partner",
+              date_of_last_contact: "2025-04-01T12:45:00.000Z",
+              messaging_link: "",
+            },
+          })
+          expect(body.updatedConnection.connection_id).toEqual(expect.any(Number));;
+        });
+    });
+    test("200: Updates date_of_last_contact values of a connection object specified by connection_id, responding with updated connection, leaving other property values unchanged", () => {
+      return request(app)
+        .patch("/api/connections/1")
+        .send({
+          date_of_last_contact: "2025-03-12T12:45:00Z"
+        })
+        .expect(200)
+        .then(({ body }) => {
+          expect(body).toMatchObject({
+            updatedConnection: {
+              username_1: "amaraj_93",
+              username_2: "liamc2020",
+              type_of_relationship: "Friend",
+              date_of_last_contact: "2025-03-12T12:45:00.000Z",
+              messaging_link: "",
+            },
+          });
+        });
+    });
+    test("200: Updates both type_of_relationship and date_of_last_contact values of a connection object specified by connection_id, responding with updated connection, leaving other property values unchanged", () => {
+      return request(app)
+        .patch("/api/connections/1")
+        .send({
+          type_of_relationship: "Family",
+          date_of_last_contact: "2025-03-12T12:45:00Z"
+        })
+        .expect(200)
+        .then(({ body }) => {
+          expect(body).toMatchObject({
+            updatedConnection: {
+              username_1: "amaraj_93",
+              username_2: "liamc2020",
+              type_of_relationship: "Family",
+              date_of_last_contact: "2025-03-12T12:45:00.000Z",
+              messaging_link: "",
+            },
+          });
+        });
+    });
+    test("400: Responds with bad request when request body is missing required properties", () => {
+      return request(app)
+        .patch("/api/connections/1")
+        .send({ some_other_field: "blahblah", })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.message).toBe("bad request");
+        });
+    });
+    test("400: Responds with bad request when connection_id provided is invalid'", () => {
+      return request(app)
+        .patch("/api/connections/three")
+        .send({
+          type_of_relationship: "Partner",
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.message).toBe("bad request");
+        });
+    });
+    test("404: Responds with not found when connection_id provided is valid, but doesnt exist", () => {
+      return request(app)
+        .patch("/api/connections/58")
+        .send({
+          type_of_relationship: "Partner",
+        })
         .expect(404)
         .then(({ body }) => {
           expect(body.message).toBe("not found");

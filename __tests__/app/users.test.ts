@@ -1,9 +1,12 @@
 import app from "../../src/server/app";
-import request from "supertest";
 import { UserObject } from "../../src/db/dataTypes";
 import seed from "../../src/db/seeds/seed";
 import * as data from "../../src/db/data/test";
 import db from "../../src/db/connection";
+import { ContactResponse } from "../../src/types/response";
+
+import bcrypt from "bcrypt";
+import request from "supertest";
 
 beforeEach(() => seed(data));
 
@@ -147,6 +150,7 @@ describe("POST /api/users", () => {
       });
   });
 });
+
 describe("GET /api/users/:username", () => {
   test("200: Responds with a user object", () => {
     return request(app)
@@ -173,4 +177,66 @@ describe("GET /api/users/:username", () => {
               expect(message).toBe("path not found");
             });
           })
+
+
+describe("GET /api/users/:username/credentials", () => {
+  test("200: Returns an object with the username and the hashed password string", () => {
+    return request(app)
+      .get("/api/users/k_osei/credentials")
+      .expect(200)
+      .then(({ body: { credential } }) => {
+        expect(credential.username).toBe("k_osei");
+        return bcrypt.compare("PalmWind01", credential.password);
+      })
+      .then((result) => expect(result).toBe(true));
+  });
+  test("404: Responds with not found if no record is found for the provide username", () => {
+    return request(app)
+      .get("/api/users/not_a_user/credentials")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("Not Found");
+      });
+  });
+});
+
+describe("GET /api/users/:username/contacts", () => {
+  test("200: Returns an array with connections and contacts of the given user", () => {
+    return request(app)
+      .get("/api/users/k_osei/contacts")
+      .expect(200)
+      .then(({ body: { contacts } }) => {
+        contacts.forEach((contact: ContactResponse) => {
+          expect(contact).toMatchObject(
+            expect.objectContaining({
+              contact_id: expect.any(Number),
+              name: expect.any(String),
+              timezone: expect.any(String),
+              isCard: expect.any(Boolean),
+            })
+          );
+          expect(contact).toHaveProperty("messaging_link");
+          expect(contact).toHaveProperty("date_of_birth");
+          expect(contact).toHaveProperty("type_of_relationship");
+          expect(contact).toHaveProperty("date_of_last_contact");
+        });
+      });
+  });
+  test("404: Responds with not found if no records are found for the provided username", () => {
+    return request(app)
+      .get("/api/users/not_a_user/contacts")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("not found");
+      });
+  });
+  test("200: Responds with an empty array if a user has no contacts", () => {
+    return request(app)
+      .get("/api/users/amaraj_93/contacts")
+      .expect(200)
+      .then(({ body: { contacts } }) => {
+        expect(contacts.length).toBe(0);
+      });
+  });
+});
 

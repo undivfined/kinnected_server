@@ -1,6 +1,7 @@
 import QueryString from "qs";
 import db from "../../db/connection";
 import { CreateUserDto } from "../../dto/dtos";
+import { checkExists } from "../../utils";
 
 export function fetchUsers(
   search:
@@ -86,6 +87,7 @@ export function addUser(newUser: CreateUserDto) {
       }
     });
 }
+
 export function fetchUserByUsername( username: string) {
   return db.query(`SELECT * FROM users WHERE username = $1`, [username])
   .then(({ rows }) => {
@@ -93,5 +95,50 @@ export function fetchUserByUsername( username: string) {
       return Promise.reject({ status: 404, message: "path not found" })
   }
     return rows[0]
+
+
+export function fetchCredentialByUsername(username: string) {
+  return db
+    .query(`SELECT * FROM credentials WHERE username = $1`, [username])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, message: "Not Found" });
+      }
+      return rows[0];
+    });
+}
+
+export function fetchContactsByUsername(username: string) {
+  return checkExists("users", "username", username).then(() => {
+    const promises = [
+      db.query(
+        `SELECT connections.connection_id AS contact_id, 
+      concat(users.first_name, ' ', users.last_name) AS name,
+      connections.type_of_relationship, connections.date_of_last_contact, connections.messaging_link,
+      users.date_of_birth, users.timezone
+      FROM connections LEFT JOIN users on users.username = connections.username_2
+      WHERE connections.username_1 = $1`,
+        [username]
+      ),
+      db.query(
+        `SELECT card_id as contact_id, name, type_of_relationship, timezone, date_of_birth, date_of_last_contact FROM cards WHERE creator_username = $1`,
+        [username]
+      ),
+    ];
+    return Promise.all(promises).then(
+      ([{ rows: connections }, { rows: cards }]) => {
+        const connectionsToReturn = connections.map((connection) => {
+          connection.isCard = false;
+          return connection;
+        });
+        const cardsToReturn = cards.map((card) => {
+          card.isCard = true;
+          card.messaging_link = "";
+          return card;
+        });
+        return [...connectionsToReturn, ...cardsToReturn];
+      }
+    );
+
   });
 }

@@ -1,5 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import { addUser, fetchUsers, fetchUserByUsername } from "../models/users.models";
+
+import {
+  addUser,
+  fetchCredentialByUsername,
+  fetchUsers,
+  fetchContactsByUsername,
+  fetchUserByUsername
+} from "../models/users.models";
+
 import { CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
@@ -41,6 +49,7 @@ export function postUser(
       next(error);
     });
 }
+
 export function getUserByUsername(request: Request, response: Response, next: NextFunction) {
   const {username}  = request.params;
   fetchUserByUsername(username).then((user) => {
@@ -50,3 +59,35 @@ export function getUserByUsername(request: Request, response: Response, next: Ne
     next(error);
   });
 }
+
+
+export function getCredentialByUsername(
+  request: Request<{ username: string }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  fetchCredentialByUsername(username)
+    .then((credential) => {
+      response.status(200).send({ credential });
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
+export function getContactsByUsername(
+  request: Request<{ username: string }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  fetchContactsByUsername(username)
+    .then((contacts) => {
+      response.status(200).send({ contacts });
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
