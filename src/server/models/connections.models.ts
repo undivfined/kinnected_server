@@ -1,9 +1,8 @@
 import { connectionObject } from "../../db/dataTypes";
 import db from "../../db/connection";
-import { NextFunction } from "express";
+import { CreateConnectionDto } from "../../dto/CreateUserDto";
 
-
-export function createConnection(connection: connectionObject){
+export function createConnection(connection: CreateConnectionDto){
     const {username_1, username_2, type_of_relationship, date_of_last_contact, messaging_link} = connection; 
 
     return db.query(
@@ -13,3 +12,7 @@ export function createConnection(connection: connectionObject){
         return rows[0]
     })
 }
+
+export function removeConnectionById(connection_id: number){
+    return db.query(`DELETE FROM connections WHERE connection_id = $1`, [connection_id]);
+  };

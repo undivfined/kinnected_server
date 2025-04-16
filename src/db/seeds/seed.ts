@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 import db from "../connection";
 import { Users, Credentials, Connections, Cards } from "../dataTypes";
-import { formatFunc } from "./utils";
+import { formatFunc } from "../../utils";
 
 const seed = ({
   userData,
