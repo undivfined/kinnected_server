@@ -41,10 +41,12 @@ export function postUser(
       next(error);
     });
 }
-export function getUserByUsername(request: Request, response: Response) {
+export function getUserByUsername(request: Request, response: Response, next: NextFunction) {
   const {username}  = request.params;
-console.log(username)
   fetchUserByUsername(username).then((user) => {
     response.status(200).send({ user });
+  })
+  .catch((error) => {
+    next(error);
   });
 }

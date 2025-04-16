@@ -148,7 +148,7 @@ describe("POST /api/users", () => {
   });
 });
 describe("GET /api/users/:username", () => {
-  test.only("200: Responds with a user object", () => {
+  test("200: Responds with a user object", () => {
     return request(app)
       .get("/api/users/amaraj_93")
       .expect(200)
@@ -164,4 +164,13 @@ describe("GET /api/users/:username", () => {
           });
         });
       });
-    });
+        });
+        test("GET 404: responds with 'not found' ", () => {
+          return request(app)
+            .get("/api/users/notausersusername")
+            .expect(404)
+            .then(({ body: { message }}) => {
+              expect(message).toBe("path not found");
+            });
+          })
+
