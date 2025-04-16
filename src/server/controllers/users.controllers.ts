@@ -3,6 +3,7 @@ import {
   addUser,
   fetchCredentialByUsername,
   fetchUsers,
+  fetchContactsByUsername,
 } from "../models/users.models";
 import { CreateUserDto } from "../../dto/dtos";
 
@@ -57,6 +58,22 @@ export function getCredentialByUsername(
       response.status(200).send({ credential });
     })
     .catch((error) => {
+      next(error);
+    });
+}
+
+export function getContactsByUsername(
+  request: Request<{ username: string }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  fetchContactsByUsername(username)
+    .then((contacts) => {
+      response.status(200).send({ contacts });
+    })
+    .catch((error) => {
+      console.log(error);
       next(error);
     });
 }
