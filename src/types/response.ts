@@ -1,7 +1,7 @@
 // response type interfaces go here
 export type ContactResponse = {
   contact_id: number;
-
+  username: string | null;
   name: string;
   type_of_relationship: string | undefined;
   timezone: string;

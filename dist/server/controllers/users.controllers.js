@@ -32,7 +32,8 @@ function postUser(request, response, next) {
 }
 function getUserByUsername(request, response, next) {
     const { username } = request.params;
-    (0, users_models_1.fetchUserByUsername)(username).then((user) => {
+    (0, users_models_1.fetchUserByUsername)(username)
+        .then((user) => {
         response.status(200).send({ user });
     })
         .catch((error) => {

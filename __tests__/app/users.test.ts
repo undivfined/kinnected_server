@@ -219,6 +219,7 @@ describe("GET /api/users/:username/contacts", () => {
           expect(contact).toHaveProperty("type_of_relationship");
           expect(contact).toHaveProperty("date_of_last_contact");
           expect(contact).toHaveProperty("avatar_url");
+          expect(contact).toHaveProperty("username");
         });
       });
   });
