@@ -19,6 +19,7 @@ import {
   handlePsqlErrors,
   handleServerErrors,
 } from "./controllers/errors.controllers";
+import { postCard } from "./controllers/cards.controllers";
 
 const app = express();
 
@@ -41,6 +42,8 @@ app.delete("/api/connections/:connection_id", deleteConnectionById);
 app.get("/api/users/:username", getUserByUsername);
 
 app.patch("/api/connections/:connection_id", patchConnectionById);
+
+app.post("/api/cards", postCard);
 
 app.use((request, response, next) => {
   response.status(404).send({ message: "path not found" });
