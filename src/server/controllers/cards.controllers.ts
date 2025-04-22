@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { addCard } from "../models/cards.models";
+import { addCard, removeCard } from "../models/cards.models";
 import { CreateCardDto } from "../../dto/dtos";
 
 export function postCard(
@@ -26,6 +26,21 @@ export function postCard(
   })
     .then((card) => {
       response.status(201).send({ card });
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
+export function deleteCard(
+  request: Request<{ card_id: number }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { card_id } = request.params;
+  removeCard(card_id)
+    .then(() => {
+      response.status(204).end();
     })
     .catch((error) => {
       next(error);

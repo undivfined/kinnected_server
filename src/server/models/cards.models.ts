@@ -1,5 +1,6 @@
 import { CreateCardDto } from "../../dto/dtos";
 import db from "../../db/connection";
+import { checkExists } from "../../utils";
 
 export function addCard({
   creator_username,
@@ -25,4 +26,10 @@ export function addCard({
     .then(({ rows: [card] }) => {
       return card;
     });
+}
+
+export function removeCard(card_id: number) {
+  return checkExists("cards", "card_id", card_id).then(() => {
+    return db.query(`DELETE FROM cards WHERE card_id=$1`, [card_id]);
+  });
 }
