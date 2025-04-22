@@ -1,5 +1,11 @@
 import app from "../../src/server/app";
 import request from "supertest";
+import db from "../../src/db/connection";
+import seed from "../../src/db/seeds/seed";
+import * as data from "../../src/db/data/test/index";
+
+beforeEach(() => seed(data));
+afterAll(() => db.end());
 
 describe("POST /api/cards", () => {
   test("201: Responds with an object representing the newly created card", () => {
@@ -70,6 +76,41 @@ describe("POST /api/cards", () => {
         timezone: "America/New_York",
         date_of_last_contact: "2025-04-08",
       })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("bad request");
+      });
+  });
+});
+describe("DELETE /api/cards/:card_id", () => {
+  test("204: Responds with 204 and deletes the card", () => {
+    return request(app)
+      .delete("/api/cards/1")
+      .expect(204)
+      .then(() => {
+        return db.query(`SELECT * FROM cards WHERE card_id=1`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(0);
+      })
+      .then(() => {
+        return db.query(`SELECT * FROM cards`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(14);
+      });
+  });
+  test("404: Responds with not found if the requested card does not exist", () => {
+    return request(app)
+      .delete("/api/cards/1000")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("not found");
+      });
+  });
+  test("400: Responds with bad request if the card_id is not valid", () => {
+    return request(app)
+      .delete("/api/cards/not_an_id")
       .expect(400)
       .then(({ body: { message } }) => {
         expect(message).toBe("bad request");
