@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const users_controllers_1 = require("./controllers/users.controllers");
 const connections_controllers_1 = require("./controllers/connections.controllers");
 const errors_controllers_1 = require("./controllers/errors.controllers");
+const cards_controllers_1 = require("./controllers/cards.controllers");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -19,6 +20,7 @@ app.post("/api/connections", connections_controllers_1.postConnection);
 app.delete("/api/connections/:connection_id", connections_controllers_1.deleteConnectionById);
 app.get("/api/users/:username", users_controllers_1.getUserByUsername);
 app.patch("/api/connections/:connection_id", connections_controllers_1.patchConnectionById);
+app.post("/api/cards", cards_controllers_1.postCard);
 app.use((request, response, next) => {
     response.status(404).send({ message: "path not found" });
 });
