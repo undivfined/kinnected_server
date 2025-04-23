@@ -29,3 +29,11 @@ export interface CreateCardDto {
   date_of_birth?: string | null;
   date_of_last_contact: string | null;
 }
+
+export interface ChangeCardDto {
+  type_of_relationship?: string;
+  name?: string;
+  timezone?: string;
+  date_of_birth?: string;
+  date_of_last_contact?: string;
+}
