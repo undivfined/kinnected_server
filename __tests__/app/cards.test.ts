@@ -117,3 +117,99 @@ describe("DELETE /api/cards/:card_id", () => {
       });
   });
 });
+
+describe("PATCH /api/cards/card_id", () => {
+  test("200: Updates a single property of a card object specified by card_id, responding with updated card, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/cards/1")
+      .send({
+        type_of_relationship: "Partner",
+      })
+      .expect(200)
+      .then(({ body: { card } }) => {
+        expect(card).toMatchObject({
+          card_id: 1,
+          creator_username: "amaraj_93",
+          type_of_relationship: "Partner",
+          name: "Auntie T",
+          timezone: "Europe/London",
+          date_of_birth: expect.any(String),
+          date_of_last_contact: expect.any(String),
+        });
+      });
+  });
+  test("200: Updates two values of a card object specified by card_id, responding with updated card, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/cards/1")
+      .send({
+        type_of_relationship: "Partner",
+        name: "New Name",
+      })
+      .expect(200)
+      .then(({ body: { card } }) => {
+        expect(card).toMatchObject({
+          card_id: 1,
+          creator_username: "amaraj_93",
+          type_of_relationship: "Partner",
+          name: "New Name",
+          timezone: "Europe/London",
+          date_of_birth: expect.any(String),
+          date_of_last_contact: expect.any(String),
+        });
+      });
+  });
+  test("200: Updates all values of a card object specified by card_id, responding with updated card, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/cards/1")
+      .send({
+        type_of_relationship: "Family",
+        date_of_last_contact: "2025-03-12T12:45:00Z",
+        name: "New Name",
+        timezone: "Europe/Minsk",
+        date_of_birth: "2020-03-12T12:45:00Z",
+      })
+      .expect(200)
+      .then(({ body: { card } }) => {
+        expect(card).toMatchObject({
+          card_id: 1,
+          creator_username: "amaraj_93",
+          type_of_relationship: "Family",
+          name: "New Name",
+          timezone: "Europe/Minsk",
+          date_of_birth: "2020-03-12T00:00:00.000Z",
+          date_of_last_contact: "2025-03-12T12:45:00.000Z",
+        });
+      });
+  });
+  test("400: Responds with bad request when request body is missing required properties", () => {
+    return request(app)
+      .patch("/api/cards/1")
+      .send({ some_other_field: "blahblah" })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.message).toBe("bad request");
+      });
+  });
+  test("400: Responds with bad request when card_id provided is invalid'", () => {
+    return request(app)
+      .patch("/api/cards/three")
+      .send({
+        type_of_relationship: "Partner",
+      })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.message).toBe("bad request");
+      });
+  });
+  test("404: Responds with not found when card_id provided is valid, but doesnt exist", () => {
+    return request(app)
+      .patch("/api/cards/1000")
+      .send({
+        type_of_relationship: "Partner",
+      })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.message).toBe("not found");
+      });
+  });
+});

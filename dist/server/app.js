@@ -22,6 +22,7 @@ app.get("/api/users/:username", users_controllers_1.getUserByUsername);
 app.patch("/api/connections/:connection_id", connections_controllers_1.patchConnectionById);
 app.post("/api/cards", cards_controllers_1.postCard);
 app.delete("/api/cards/:card_id", cards_controllers_1.deleteCard);
+app.patch("/api/cards/:card_id", cards_controllers_1.patchCard);
 app.use((request, response, next) => {
     response.status(404).send({ message: "path not found" });
 });

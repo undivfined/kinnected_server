@@ -15,6 +15,7 @@ function handlePsqlErrors(error, request, response, next) {
         "22008",
         "23505",
         "22007",
+        "42601",
     ];
     if (psqlErrors.includes(error.code)) {
         response.status(400).send({ message: "bad request" });

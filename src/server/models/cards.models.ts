@@ -33,3 +33,54 @@ export function removeCard(card_id: number) {
     return db.query(`DELETE FROM cards WHERE card_id=$1`, [card_id]);
   });
 }
+
+export function editCard(
+  card_id: number,
+  type_of_relationship?: string,
+  name?: string,
+  timezone?: string,
+  date_of_birth?: string,
+  date_of_last_contact?: string
+) {
+  return checkExists("cards", "card_id", card_id).then(() => {
+    type Value = string | number;
+    const updates: string[] = [];
+    const values: Value[] = [];
+    let paramIndex = 1;
+
+    if (type_of_relationship) {
+      updates.push(`type_of_relationship = $${paramIndex++}`);
+      values.push(type_of_relationship);
+    }
+
+    if (date_of_last_contact) {
+      updates.push(`date_of_last_contact = $${paramIndex++}`);
+      values.push(date_of_last_contact);
+    }
+
+    if (name) {
+      updates.push(`name = $${paramIndex++}`);
+      values.push(name);
+    }
+
+    if (timezone) {
+      updates.push(`timezone = $${paramIndex++}`);
+      values.push(timezone);
+    }
+
+    if (date_of_birth) {
+      updates.push(`date_of_birth = $${paramIndex++}`);
+      values.push(date_of_birth);
+    }
+
+    values.push(card_id);
+
+    const query = `
+      UPDATE cards
+      SET ${updates.join(", ")}
+      WHERE card_id = $${paramIndex}
+      RETURNING *;
+    `;
+    return db.query(query, values).then(({ rows }) => rows[0]);
+  });
+}
