@@ -36,11 +36,11 @@ export function removeCard(card_id: number) {
 
 export function editCard(
   card_id: number,
-  type_of_relationship?: string,
-  name?: string,
-  timezone?: string,
-  date_of_birth?: string,
-  date_of_last_contact?: string
+  type_of_relationship: string | undefined,
+  name: string | undefined,
+  timezone: string | undefined,
+  date_of_birth: string | undefined,
+  date_of_last_contact: string | undefined
 ) {
   return checkExists("cards", "card_id", card_id).then(() => {
     type Value = string | number;
