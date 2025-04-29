@@ -240,3 +240,31 @@ describe("GET /api/users/:username/contacts", () => {
       });
   });
 });
+
+describe("DELETE /api/users/:username", () => {
+  test("204: Successfully deletes the provided user from the users and credentials tables", () => {
+    return request(app)
+      .delete("/api/users/emjay23")
+      .expect(204)
+      .then(() => {
+        return db.query(`SELECT * FROM users WHERE username='emjay23'`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(0);
+      })
+      .then(() => {
+        return db.query(`SELECT * FROM credentials WHERE username='emjay23'`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(0);
+      });
+  });
+  test("404: Responds with not found when no user with the given username exists in the database", () => {
+    return request(app)
+      .delete("/api/users/not_a_user")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("not found");
+      });
+  });
+});
