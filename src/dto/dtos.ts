@@ -37,3 +37,11 @@ export interface ChangeCardDto {
   date_of_birth?: string;
   date_of_last_contact?: string;
 }
+
+export interface ChangeUserDto {
+  first_name?: string;
+  last_name?: string;
+  timezone?: string;
+  date_of_birth?: string;
+  avatar_url?: string;
+}
