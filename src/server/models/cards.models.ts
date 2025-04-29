@@ -48,12 +48,12 @@ export function editCard(
     const values: Value[] = [];
     let paramIndex = 1;
 
-    if (type_of_relationship) {
+    if (type_of_relationship !== undefined) {
       updates.push(`type_of_relationship = $${paramIndex++}`);
       values.push(type_of_relationship);
     }
 
-    if (date_of_last_contact) {
+    if (date_of_last_contact !== undefined) {
       updates.push(`date_of_last_contact = $${paramIndex++}`);
       values.push(date_of_last_contact);
     }
@@ -68,7 +68,7 @@ export function editCard(
       values.push(timezone);
     }
 
-    if (date_of_birth) {
+    if (date_of_birth !== undefined) {
       updates.push(`date_of_birth = $${paramIndex++}`);
       values.push(date_of_birth);
     }
