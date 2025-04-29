@@ -6,6 +6,7 @@ import {
   fetchUsers,
   fetchContactsByUsername,
   fetchUserByUsername,
+  removeUserByUsername,
 } from "../models/users.models";
 
 import { CreateUserDto } from "../../dto/dtos";
@@ -89,6 +90,21 @@ export function getContactsByUsername(
   fetchContactsByUsername(username)
     .then((contacts) => {
       response.status(200).send({ contacts });
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
+export function deleteUserByUsername(
+  request: Request<{ username: string }>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  removeUserByUsername(username)
+    .then(() => {
+      response.status(204).end();
     })
     .catch((error) => {
       next(error);

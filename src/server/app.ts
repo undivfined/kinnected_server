@@ -7,6 +7,7 @@ import {
   getCredentialByUsername,
   getContactsByUsername,
   getUserByUsername,
+  deleteUserByUsername,
 } from "./controllers/users.controllers";
 
 import {
@@ -44,6 +45,8 @@ app.post("/api/connections", postConnection);
 app.delete("/api/connections/:connection_id", deleteConnectionById);
 
 app.get("/api/users/:username", getUserByUsername);
+
+app.delete("/api/users/:username", deleteUserByUsername);
 
 app.patch("/api/connections/:connection_id", patchConnectionById);
 

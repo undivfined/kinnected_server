@@ -145,3 +145,9 @@ export function fetchContactsByUsername(username: string) {
     );
   });
 }
+
+export function removeUserByUsername(username: string) {
+  return checkExists("users", "username", username).then(() => {
+    return db.query(`DELETE FROM users WHERE username=$1`, [username]);
+  });
+}
