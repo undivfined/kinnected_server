@@ -8,6 +8,7 @@ import {
   getContactsByUsername,
   getUserByUsername,
   deleteUserByUsername,
+  patchUserByUsername,
 } from "./controllers/users.controllers";
 
 import {
@@ -45,6 +46,8 @@ app.post("/api/connections", postConnection);
 app.delete("/api/connections/:connection_id", deleteConnectionById);
 
 app.get("/api/users/:username", getUserByUsername);
+
+app.patch("/api/users/:username", patchUserByUsername);
 
 app.delete("/api/users/:username", deleteUserByUsername);
 

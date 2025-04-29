@@ -151,3 +151,55 @@ export function removeUserByUsername(username: string) {
     return db.query(`DELETE FROM users WHERE username=$1`, [username]);
   });
 }
+
+export function editUser(
+  username: string,
+  first_name: string | undefined,
+  last_name: string | undefined,
+  date_of_birth: string | undefined,
+  timezone: string | undefined,
+  avatar_url: string | undefined
+) {
+  return checkExists("users", "username", username).then(() => {
+    type Value = string | number;
+    const updates: string[] = [];
+    const values: Value[] = [];
+    let paramIndex = 1;
+
+    if (first_name) {
+      updates.push(`first_name = $${paramIndex++}`);
+      values.push(first_name);
+    }
+
+    if (last_name) {
+      updates.push(`last_name = $${paramIndex++}`);
+      values.push(last_name);
+    }
+
+    if (avatar_url !== undefined) {
+      updates.push(`avatar_url = $${paramIndex++}`);
+      values.push(avatar_url);
+    }
+
+    if (timezone) {
+      updates.push(`timezone = $${paramIndex++}`);
+      values.push(timezone);
+    }
+
+    if (date_of_birth) {
+      updates.push(`date_of_birth = $${paramIndex++}`);
+      values.push(date_of_birth);
+    }
+
+    values.push(username);
+
+    const query = `
+        UPDATE users
+        SET ${updates.join(", ")}
+        WHERE username = $${paramIndex}
+        RETURNING *;
+      `;
+
+    return db.query(query, values).then(({ rows }) => rows[0]);
+  });
+}

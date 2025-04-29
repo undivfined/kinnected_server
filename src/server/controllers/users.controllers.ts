@@ -7,9 +7,10 @@ import {
   fetchContactsByUsername,
   fetchUserByUsername,
   removeUserByUsername,
+  editUser,
 } from "../models/users.models";
 
-import { CreateUserDto } from "../../dto/dtos";
+import { ChangeUserDto, CreateUserDto } from "../../dto/dtos";
 
 export function getUsers(request: Request, response: Response) {
   const { search } = request.query;
@@ -105,6 +106,24 @@ export function deleteUserByUsername(
   removeUserByUsername(username)
     .then(() => {
       response.status(204).end();
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
+
+export function patchUserByUsername(
+  request: Request<{ username: string }, {}, ChangeUserDto>,
+  response: Response,
+  next: NextFunction
+) {
+  const { username } = request.params;
+  const { first_name, last_name, date_of_birth, timezone, avatar_url } =
+    request.body;
+
+  editUser(username, first_name, last_name, date_of_birth, timezone, avatar_url)
+    .then((user) => {
+      response.status(200).send({ user });
     })
     .catch((error) => {
       next(error);
