@@ -36,14 +36,14 @@ export function removeCard(card_id: number) {
 
 export function editCard(
   card_id: number,
-  type_of_relationship: string | undefined,
+  type_of_relationship: string | undefined | null,
   name: string | undefined,
   timezone: string | undefined,
-  date_of_birth: string | undefined,
-  date_of_last_contact: string | undefined
+  date_of_birth: string | undefined | null,
+  date_of_last_contact: string | undefined | null
 ) {
   return checkExists("cards", "card_id", card_id).then(() => {
-    type Value = string | number;
+    type Value = string | number | null;
     const updates: string[] = [];
     const values: Value[] = [];
     let paramIndex = 1;
