@@ -158,10 +158,10 @@ export function editUser(
   last_name: string | undefined,
   date_of_birth: string | undefined,
   timezone: string | undefined,
-  avatar_url: string | undefined
+  avatar_url: string | undefined | null
 ) {
   return checkExists("users", "username", username).then(() => {
-    type Value = string;
+    type Value = string | null;
     const updates: string[] = [];
     const values: Value[] = [];
     let paramIndex = 1;
