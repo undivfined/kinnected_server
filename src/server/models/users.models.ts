@@ -161,7 +161,7 @@ export function editUser(
   avatar_url: string | undefined
 ) {
   return checkExists("users", "username", username).then(() => {
-    type Value = string | number;
+    type Value = string;
     const updates: string[] = [];
     const values: Value[] = [];
     let paramIndex = 1;
