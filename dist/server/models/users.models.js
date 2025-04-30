@@ -8,6 +8,8 @@ exports.addUser = addUser;
 exports.fetchUserByUsername = fetchUserByUsername;
 exports.fetchCredentialByUsername = fetchCredentialByUsername;
 exports.fetchContactsByUsername = fetchContactsByUsername;
+exports.removeUserByUsername = removeUserByUsername;
+exports.editUser = editUser;
 const connection_1 = __importDefault(require("../../db/connection"));
 const utils_1 = require("../../utils");
 function fetchUsers(search) {
@@ -115,5 +117,45 @@ function fetchContactsByUsername(username) {
             });
             return [...connectionsToReturn, ...cardsToReturn];
         });
+    });
+}
+function removeUserByUsername(username) {
+    return (0, utils_1.checkExists)("users", "username", username).then(() => {
+        return connection_1.default.query(`DELETE FROM users WHERE username=$1`, [username]);
+    });
+}
+function editUser(username, first_name, last_name, date_of_birth, timezone, avatar_url) {
+    return (0, utils_1.checkExists)("users", "username", username).then(() => {
+        const updates = [];
+        const values = [];
+        let paramIndex = 1;
+        if (first_name) {
+            updates.push(`first_name = $${paramIndex++}`);
+            values.push(first_name);
+        }
+        if (last_name) {
+            updates.push(`last_name = $${paramIndex++}`);
+            values.push(last_name);
+        }
+        if (avatar_url !== undefined) {
+            updates.push(`avatar_url = $${paramIndex++}`);
+            values.push(avatar_url);
+        }
+        if (timezone) {
+            updates.push(`timezone = $${paramIndex++}`);
+            values.push(timezone);
+        }
+        if (date_of_birth) {
+            updates.push(`date_of_birth = $${paramIndex++}`);
+            values.push(date_of_birth);
+        }
+        values.push(username);
+        const query = `
+        UPDATE users
+        SET ${updates.join(", ")}
+        WHERE username = $${paramIndex}
+        RETURNING *;
+      `;
+        return connection_1.default.query(query, values).then(({ rows }) => rows[0]);
     });
 }

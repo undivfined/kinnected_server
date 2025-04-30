@@ -5,24 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const users_controllers_1 = require("./controllers/users.controllers");
-const connections_controllers_1 = require("./controllers/connections.controllers");
 const errors_controllers_1 = require("./controllers/errors.controllers");
-const cards_controllers_1 = require("./controllers/cards.controllers");
+const api_router_1 = require("../routers/api-router");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.get("/api/users", users_controllers_1.getUsers);
-app.post("/api/users", users_controllers_1.postUser);
-app.get("/api/users/:username/credentials", users_controllers_1.getCredentialByUsername);
-app.get("/api/users/:username/contacts", users_controllers_1.getContactsByUsername);
-app.post("/api/connections", connections_controllers_1.postConnection);
-app.delete("/api/connections/:connection_id", connections_controllers_1.deleteConnectionById);
-app.get("/api/users/:username", users_controllers_1.getUserByUsername);
-app.patch("/api/connections/:connection_id", connections_controllers_1.patchConnectionById);
-app.post("/api/cards", cards_controllers_1.postCard);
-app.delete("/api/cards/:card_id", cards_controllers_1.deleteCard);
-app.patch("/api/cards/:card_id", cards_controllers_1.patchCard);
+app.use("/api", api_router_1.apiRouter);
 app.use((request, response, next) => {
     response.status(404).send({ message: "path not found" });
 });

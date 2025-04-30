@@ -240,3 +240,124 @@ describe("GET /api/users/:username/contacts", () => {
       });
   });
 });
+
+describe("DELETE /api/users/:username", () => {
+  test("204: Successfully deletes the provided user from the users and credentials tables", () => {
+    return request(app)
+      .delete("/api/users/emjay23")
+      .expect(204)
+      .then(() => {
+        return db.query(`SELECT * FROM users WHERE username='emjay23'`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(0);
+      })
+      .then(() => {
+        return db.query(`SELECT * FROM credentials WHERE username='emjay23'`);
+      })
+      .then(({ rows }) => {
+        expect(rows.length).toBe(0);
+      });
+  });
+  test("404: Responds with not found when no user with the given username exists in the database", () => {
+    return request(app)
+      .delete("/api/users/not_a_user")
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("not found");
+      });
+  });
+});
+
+describe("PATCH /api/users/:username", () => {
+  test("200: Updates a single property of a user object specified by username, responding with updated user, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/users/emjay23")
+      .send({
+        first_name: "New",
+      })
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user).toMatchObject({
+          username: "emjay23",
+          first_name: "New",
+          last_name: "Johnson",
+          timezone: "America/Chicago",
+          date_of_birth: "1999-03-17T00:00:00.000Z",
+          avatar_url: "https://example.com/avatars/emily.png",
+        });
+      });
+  });
+  test("200: Updates two properties of a user object specified by username, responding with updated user, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/users/emjay23")
+      .send({
+        first_name: "New",
+        last_name: "Changed",
+      })
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user).toMatchObject({
+          username: "emjay23",
+          first_name: "New",
+          last_name: "Changed",
+          timezone: "America/Chicago",
+          date_of_birth: "1999-03-17T00:00:00.000Z",
+          avatar_url: "https://example.com/avatars/emily.png",
+        });
+      });
+  });
+  test("200: Updates all properties of a user object specified by username, responding with updated user, leaving other property values unchanged", () => {
+    return request(app)
+      .patch("/api/users/emjay23")
+      .send({
+        first_name: "New",
+        last_name: "Changed",
+        timezone: "America/New_York",
+        date_of_birth: "2005-03-17T00:00:00.000Z",
+        avatar_url: "",
+      })
+      .expect(200)
+      .then(({ body: { user } }) => {
+        expect(user).toMatchObject({
+          username: "emjay23",
+          first_name: "New",
+          last_name: "Changed",
+          timezone: "America/New_York",
+          date_of_birth: "2005-03-17T00:00:00.000Z",
+          avatar_url: "",
+        });
+      });
+  });
+  test("400: Responds with bad request if any of the provided values are not valid", () => {
+    return request(app)
+      .patch("/api/users/emjay23")
+      .send({
+        date_of_birth: "not_a_date",
+      })
+      .expect(400)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("bad request");
+      });
+  });
+  test("404: Responds with not found if no user with the provided username exists in the database", () => {
+    return request(app)
+      .patch("/api/users/not_a_user")
+      .send({
+        date_of_birth: "not_a_date",
+      })
+      .expect(404)
+      .then(({ body: { message } }) => {
+        expect(message).toBe("not found");
+      });
+  });
+  test("400: Responds with bad request when request body is missing required properties", () => {
+    return request(app)
+      .patch("/api/users/emjay23")
+      .send({ some_other_field: "blahblah" })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.message).toBe("bad request");
+      });
+  });
+});

@@ -162,7 +162,7 @@ describe("PATCH /api/cards/card_id", () => {
     return request(app)
       .patch("/api/cards/1")
       .send({
-        type_of_relationship: "Family",
+        type_of_relationship: null,
         date_of_last_contact: "2025-03-12T12:45:00Z",
         name: "New Name",
         timezone: "Europe/Minsk",
@@ -173,7 +173,7 @@ describe("PATCH /api/cards/card_id", () => {
         expect(card).toMatchObject({
           card_id: 1,
           creator_username: "amaraj_93",
-          type_of_relationship: "Family",
+          type_of_relationship: null,
           name: "New Name",
           timezone: "Europe/Minsk",
           date_of_birth: "2020-03-12T00:00:00.000Z",
